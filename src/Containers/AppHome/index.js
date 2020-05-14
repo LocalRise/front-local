@@ -2,24 +2,27 @@ import React, { useState, useEffect } from "react";
 import AppHome from "./AppHome";
 
 import { fetchData } from "../../helper/mock";
+import useSheet from "./../../utils/useSheet"
 
 const AppHomeContainer = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
-  const [data, setData] = useState();
+  const { data, error, loading } = useSheet("Index")
 
-  useEffect(() => {
-    const initFunc = async () => {
-      try {
-        const data = await fetchData();
-        setLoading(false);
-        setData(data);
-      } catch (e) {
-        setError(e);
-      }
-    };
-    initFunc();
-  }, []);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState();
+  // const [data, setData] = useState();
+
+  // useEffect(() => {
+  //   const initFunc = async () => {
+  //     try {
+  //       const data = await fetchData();
+  //       setLoading(false);
+  //       setData(data);
+  //     } catch (e) {
+  //       setError(e);
+  //     }
+  //   };
+  //   initFunc();
+  // }, []);
 
   if (error) {
     return <div>{error}</div>;

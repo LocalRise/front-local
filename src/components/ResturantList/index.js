@@ -1,13 +1,18 @@
 import React from "react"
+import { mapByRestaurant } from "./../../utils/mapSheet"
 import RestaurantItem from "./RestaurantItem.js"
 
 const RestaurantList = ({ data }) => {
+    const mappedData = data ? mapByRestaurant(data) : []
+
     return (
         <>
-            {data &&
-                data.map((item, index) => {
+            {mappedData &&
+                mappedData.map((item, index) => {
                     return (
-                        <RestaurantItem data={item, index} />
+                        <>
+                            <RestaurantItem key={index} data={item}/>
+                        </>
                     );
                 })}
         </>

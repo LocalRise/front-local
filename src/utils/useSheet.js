@@ -13,7 +13,7 @@ const initial = {
 const useSheet = sheetname => {
   const [data, setData] = useState(initial)
   const [error, setError] = useState()
-  const [isLoading, setIsLoading] = useState(false)
+  const [loading, setIsLoading] = useState(false)
 
   useEffect(() => {
     const callApi = async () => {
@@ -32,7 +32,7 @@ const useSheet = sheetname => {
     callApi()
   }, [])
 
-  return { data: data.values, error, isLoading }
+  return { data: data.values, error, loading }
 }
 
 export default useSheet
