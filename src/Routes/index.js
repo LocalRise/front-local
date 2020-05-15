@@ -2,14 +2,17 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import AppHome from "../Containers/AppHome";
+import { route } from "next/dist/next-server/server/router";
+import RestaurantIndex from "./../Containers/restaurant"
 const ExampleContainer = () => <div>Hi</div>;
 
 const RouteApp = () => {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={AppHome} />
+        <Route path="/restaurant" component={RestaurantIndex} />
         <Route path="/ex" component={ExampleContainer} />
+        <Route path="/" component={AppHome} />
       </Switch>
     </Router>
   );
