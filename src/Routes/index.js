@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import AppHome from "../Containers/AppHome";
 import { route } from "next/dist/next-server/server/router";
-import RestaurantIndex from "./../Containers/restaurant"
+import RestaurantIndex from "./../Containers/RestaurantPage"
 const ExampleContainer = () => <div>Hi</div>;
 
 const RouteApp = () => {
