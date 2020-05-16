@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import AppHome from "./AppHome";
 
 import { fetchData } from "../../helper/mock";
-import useSheet from "./../../utils/useSheet"
+import useSheet from "../../utils/useSheet";
 
 const AppHomeContainer = () => {
-  const { data, error, loading } = useSheet("Index")
+  const { data, error, loading } = useSheet("Index");
 
   // const [loading, setLoading] = useState(true);
   // const [error, setError] = useState();
@@ -25,7 +25,7 @@ const AppHomeContainer = () => {
   // }, []);
 
   if (error) {
-    console.log(error)
+    console.log(error);
     return <div>error</div>;
   }
 

@@ -1,9 +1,9 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import AppHome from "../Containers/AppHome";
+import AppHome from "../containers/AppHome";
 import { route } from "next/dist/next-server/server/router";
-import RestaurantIndex from "./../Containers/RestaurantPage"
+import RestaurantIndex from "./../containers/RestaurantPage";
 const ExampleContainer = () => <div>Hi</div>;
 
 const RouteApp = () => {
