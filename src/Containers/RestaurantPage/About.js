@@ -7,7 +7,7 @@ import { mapByResDetail } from "../../utils/mapSheet"
 // import { FiPhoneOutgoing } from "react-icons/fi"
 // import ClipLoader from "react-spinners/ClipLoader"
 
-const Info = ({ data }) => {
+const About = ({ data }) => {
     const {
         shop_name,
         res_img,
@@ -36,9 +36,8 @@ const Info = ({ data }) => {
                 ) : ("")}
                 <span className="block py-1 text-sm">{descript_shop}</span>
             </div>
-            <p>{shop_name}</p>
         </>
     )
 }
 
-export default Info
+export default About

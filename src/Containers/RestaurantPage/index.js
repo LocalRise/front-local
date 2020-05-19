@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { Link } from "react-router-dom";
 
 import useSheet from "../../utils/useSheet"
-import Info from "./Info"
+import About from "./About"
 import MenuList from "./../../components/MenuList"
 // import styled from "styled-components"
 
@@ -12,7 +12,11 @@ const IndexPage = ({ location }) => {
     
     return (
         <>
-            <Info data={data} />
+            <ShopCover />
+            <div>
+                
+            </div>
+            <About data={data} />
             <MenuList data={data}/>
         </>
     )
