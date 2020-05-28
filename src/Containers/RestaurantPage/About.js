@@ -1,5 +1,4 @@
 import React, { useEffect } from "react"
-import { mapByResDetail } from "../../utils/mapSheet"
 
 // import { MdAccessTime, MdLocationOn } from "react-icons/md"
 // import { FaFacebook } from "react-icons/fa"
@@ -7,28 +6,17 @@ import { mapByResDetail } from "../../utils/mapSheet"
 // import { FiPhoneOutgoing } from "react-icons/fi"
 // import ClipLoader from "react-spinners/ClipLoader"
 
-const About = ({ data }) => {
-    const {
-        shop_name,
-        res_img,
-        facebook,
-        location: res_location,
-        open_date,
-        open_time,
-        tel,
-        descript_shop
-    } = data && data.length >= 2 ? mapByResDetail(data) : {}
-    let isOpen = true
+const About = ({ dataMo:{shop_name,facebook,location,open_date,open_time,tel,descript_shop,isOpen} }) => {
     return (
         <>
             <div className={`p-5 text-lg ${isOpen ? 'block' : 'hidden'}`}>
-                <a className="block py-1" href={`${facebook}`} target="_blank">
+                <a className="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800" href={`${facebook}`} target="_blank">
                     {shop_name}
                 </a>
-                <a className="block py-1" href={`tel:${tel}`} >
+                <a className="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800" href={`tel:${tel}`} >
                     {tel}
                 </a>
-                <a className="block py-1" href={`${res_location}`} target="_blank">
+                <a className="text-sm py-2 px-4 font-normal block w-full whitespace-no-wrap bg-transparent text-gray-800" href={`${location}`} target="_blank">
                     See in map
                 </a>
                 {open_time || open_date ? (

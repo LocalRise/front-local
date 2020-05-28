@@ -9,7 +9,7 @@ const RestaurantList = ({ data }) => {
     const mappedData = data ? mapByRestaurant(data) : []
 
     return (
-        <div>
+        <div className="flex flex-wrap justify-around">
             {mappedData &&
                 mappedData.map((item, index) => {
                     return (
