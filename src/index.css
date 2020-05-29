@@ -1,17 +1,17 @@
 @font-face {
   font-family: Cloud;
-  src: url("./fonts/Cloud-Light.otf") format("opentype");
+  src: url('./fonts/Cloud-Light.otf') format('opentype');
 }
 
 @font-face {
   font-family: Cloud;
   font-weight: bold;
-  src: url("./fonts/Cloud-Bold.otf") format("opentype");
+  src: url('./fonts/Cloud-Bold.otf') format('opentype');
 }
 
 @font-face {
   font-family: PeaceSans;
-  src: url("./fonts/Peace-Sans.otf") format("opentype");
+  src: url('./fonts/Peace-Sans.otf') format('opentype');
 }
 
 html,

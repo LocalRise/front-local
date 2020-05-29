@@ -1,10 +1,10 @@
-import React from "react"
-import styled from "styled-components"
+import React from 'react'
+import styled from 'styled-components'
 
 const TextLogo = styled.div`
   & > span {
     font-family: PeaceSans;
-    font-size: ${props => (props.size ? props.size : "17.5px")};
+    font-size: ${(props) => (props.size ? props.size : '17.5px')};
     line-height: 0.91;
     text-align: left;
     color: #31a98b;
@@ -17,7 +17,7 @@ const TextLogo = styled.div`
   }
 `
 
-const LogoText = props => {
+const LogoText = (props) => {
   return (
     <TextLogo {...props}>
       <span>FRESH</span>

@@ -1,10 +1,7 @@
-import React from "react"
+import React from 'react'
 
-const Category = ({data:{cateory}})=>{
-    return (
-        <>
-        </>
-    )
+const Category = ({ data: { cateory } }) => {
+  return <></>
 }
 
 export default Category
