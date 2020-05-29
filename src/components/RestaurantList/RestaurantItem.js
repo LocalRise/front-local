@@ -14,9 +14,9 @@ const RestaurantItem = ({ data: { id, name } }) => {
                 className="bg-gray-100 shadow-xl rounded-md relative "
             >
                 <div>
-                    <img class="object-cover h-40 w-full rounded-md" src={res_img || "https://semantic-ui.com/images/wireframe/image.png"} />
+                    <img class="object-cover h-40 w-full  rounded-md" src={res_img || "https://semantic-ui.com/images/wireframe/image.png"} />
                 </div>
-                <div className="absolute bottom-0 right-0 mr-2 ">
+                <div className="absolute top-0 right-0 mr-2 ">
                     {mockOpen == "open" ? (
                         <span className="inline-block bg-green-500 rounded-full px-2 text-xs font-semibold text-white">OPEN</span>
                         ) : (

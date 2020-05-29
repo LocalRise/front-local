@@ -2,8 +2,11 @@ import React, { useEffect } from "react"
 import { Link } from "react-router-dom";
 
 import useSheet from "../../utils/useSheet"
+import AboutDropdown from "./AboutDropdown"
+import MenuList from "./../../components/MenuList"
+import ShopCover from "./ShopCover"
 import { mapByResDetail } from "../../utils/mapSheet"
-import Info from "./Info"
+
 // import styled from "styled-components"
 
 const IndexPage = ({ location }) => {
@@ -20,25 +23,18 @@ const IndexPage = ({ location }) => {
         descript_shop
     } = data && data.length >= 2 ? mapByResDetail(data) : {}
     let isOpen = true
+    const dataMo = { shop_name, facebook, location, open_date, open_time, tel, descript_shop, isOpen }
+
     return (
         <>
-            {/* <Info data={data} /> */}
-            <div className={`p-5 text-lg ${isOpen?'block':'hidden'}`}>
-                <a className="block py-1" href={`${facebook}`} target="_blank">
-                    {shop_name}
-                </a>
-                <a className="block py-1" href={`tel:${tel}`} >
-                    {tel}
-                </a>
-                <a className="block py-1" href={`${res_location}`} target="_blank">
-                    See in map
-                </a>
-                {open_time || open_date ? (
-                    <span className="block py-1">{open_date ? (<span>{open_date}&nbsp;</span>) : ("")}{open_time}</span>
-                ) : ("")}
-                <span className="block py-1 text-sm">{descript_shop}</span>
+            <ShopCover res_img={res_img} shop_name={shop_name} />
+            
+            <div>
+                {/* tabbar Menu|About|Rate/Comment */}
             </div>
-            <p>{shop_name}</p>
+            <AboutDropdown dataMo={dataMo} />
+            <p className="text-2xl font-bold ml-5 md:ml-10 lg:ml-24">รายการอาหาร</p>
+            <MenuList data={data} />
         </>
     )
 }
