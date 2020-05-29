@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AppHome from "./AppHome";
 
-import { fetchData } from "../../helper/mock";
 import useSheet from "../../utils/useSheet";
 
 const AppHomeContainer = () => {
