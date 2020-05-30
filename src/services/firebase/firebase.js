@@ -14,4 +14,7 @@ const firebaseConfig = {
   measurementId: 'G-LKVZE64BVC',
 }
 
+export const getFacebookProvider = () =>
+  new firebase.auth.FacebookAuthProvider()
+
 export default firebase.initializeApp(firebaseConfig)
