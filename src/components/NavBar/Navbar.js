@@ -2,8 +2,12 @@ import React from 'react'
 import { FiSearch, FiMenu } from 'react-icons/fi'
 import { TiThMenu } from 'react-icons/ti'
 import { SignUpButton, SignInButton } from './index'
+import { useAuth } from '../../services/firebase'
 
 const Navbar = () => {
+  const { user } = useAuth()
+  console.log(user)
+
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
@@ -23,6 +27,7 @@ const Navbar = () => {
       </div>
       <div className="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div className="text-sm lg:flex-grow"></div>
+
         <SignInButton />
         <SignUpButton />
       </div>

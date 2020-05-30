@@ -17,7 +17,7 @@ export async function signInWithFacebook() {
     console.log('h')
     var provider = getFacebookProvider()
     const result = await firebase.auth().signInWithPopup(provider)
-    console.log(result)
+    console.log(result, result.user)
   } catch (error) {
     throw error
   }
