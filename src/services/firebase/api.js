@@ -14,11 +14,14 @@ export async function signUpWithEmail(email, password) {
 
 export async function signInWithFacebook() {
   try {
-    console.log('h')
     var provider = getFacebookProvider()
     const result = await firebase.auth().signInWithPopup(provider)
     console.log(result, result.user)
   } catch (error) {
     throw error
   }
+}
+
+export async function signOut() {
+  return firebase.auth().signOut()
 }

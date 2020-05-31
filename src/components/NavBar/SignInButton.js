@@ -1,7 +1,7 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
 
-const SignIn = ({ history }) => {
+const SignInButton = ({ history }) => {
   return (
     <div
       onClick={() => {
@@ -15,4 +15,4 @@ const SignIn = ({ history }) => {
   )
 }
 
-export default withRouter(SignIn)
+export default withRouter(SignInButton)
