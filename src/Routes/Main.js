@@ -13,11 +13,10 @@ const Main = () => {
     <Router>
       <Navbar />
       <Switch>
-        {/* <Route path="/restaurant" component={RestaurantIndex} />
-        <Route path="/ex" component={ExampleContainer} />
-        <Route path="/" component={AppHome} /> */}
-        <Route path="/signin" exact component={SignInContainer} />
-        <Route path="/signup" exact component={SignUpContainer} />
+        <Route exact path="/restaurant" component={RestaurantIndex} />
+        <Route exact path="/" component={AppHome} />
+        <Route exact path="/signin" exact component={SignInContainer} />
+        <Route exact path="/signup" exact component={SignUpContainer} />
       </Switch>
     </Router>
   )

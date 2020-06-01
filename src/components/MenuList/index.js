@@ -1,17 +1,6 @@
-import React, { useEffect } from 'react'
 import MenuItem from './MenuItem'
-import { mapByMenu } from './../../utils/mapSheet'
+import MenuList from './MenuList'
 
-const MenuList = ({ data }) => {
-  const mappedData = data ? mapByMenu(data) : []
-  return (
-    <div className="flex flex-wrap mr-1 ml-1">
-      {mappedData &&
-        mappedData.map((val, ind) => {
-          return <MenuItem key={ind} data={val} />
-        })}
-    </div>
-  )
-}
+export { MenuItem }
 
 export default MenuList

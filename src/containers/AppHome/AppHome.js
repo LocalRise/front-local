@@ -1,6 +1,5 @@
 import React from 'react'
-import RestaurantList from '../../components/RestaurantList'
-import Navbar from '../../components/NavBar/Navbar'
+import MerchantList from '../../components/MerchantList'
 
 const AppHome = ({ data }) => {
   return (
@@ -9,7 +8,7 @@ const AppHome = ({ data }) => {
         ร้านค้าที่ร่วมรายการ
       </h1>
       {data && (
-        <RestaurantList className="flex md:flex-row flex-wrap" data={data} />
+        <MerchantList className="flex md:flex-row flex-wrap" data={data} />
       )}
     </>
   )

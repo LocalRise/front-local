@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 const SignUpButton = ({ history }) => {
   return (
     <div
+      className="cursor-pointer"
       onClick={() => {
         history.push('/signup')
       }}
