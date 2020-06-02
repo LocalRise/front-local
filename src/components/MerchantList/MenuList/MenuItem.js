@@ -1,12 +1,18 @@
 import React from 'react'
 
-const MenuItem = ({ data: { menuName, menuImage, menuPrice } }) => {
+const MenuItem = ({
+  data: { menuName, menuImage, menuPrice, id },
+  handleSelect,
+}) => {
   return (
-    <div className="shadow-lg">
+    <div
+      className="shadow-lg cursor-pointer hover:shadow-2xl"
+      onClick={() => handleSelect(id)}
+    >
       {menuImage && (
         <div className="h-40">
           <img
-            alt="ecommerce"
+            alt={menuName}
             className="object-cover object-center w-full h-full block"
             src={menuImage}
           />

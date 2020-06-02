@@ -28,7 +28,10 @@ const IndexPage = ({ location }) => {
 
   const merchant = merchants[id]
   const menu = menus[id]
-  console.log(merchants, menus)
+
+  const handleSelect = (menuId) => {
+    alert(`${id} ${menuId}`)
+  }
 
   return (
     <>
@@ -36,7 +39,7 @@ const IndexPage = ({ location }) => {
       <div>{/* tabbar Menu|About|Rate/Comment */}</div>
       {/* <AboutDropdown dataMo={dataMo} /> */}
       <p className="text-2xl font-bold ml-5 md:ml-10 lg:ml-24">รายการอาหาร</p>
-      <MenuList data={menu} />
+      <MenuList data={menu} handleSelect={handleSelect} />
     </>
   )
 }
