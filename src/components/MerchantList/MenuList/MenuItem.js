@@ -2,15 +2,17 @@ import React from 'react'
 
 const MenuItem = ({ data: { menuName, menuImage, menuPrice } }) => {
   return (
-    <div>
+    <div className="shadow-lg">
       {menuImage && (
-        <img
-          alt="ecommerce"
-          className="object-cover object-center w-full h-full block"
-          src={menuImage}
-        />
+        <div className="h-40">
+          <img
+            alt="ecommerce"
+            className="object-cover object-center w-full h-full block"
+            src={menuImage}
+          />
+        </div>
       )}
-      <div className="mt-4">
+      <div className="mt-2 p-2">
         <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
           CATEGORY
         </h3>
