@@ -9,14 +9,14 @@ const MerchantList = ({ data }) => {
       <div class="container px-5 py-6 mx-auto">
         <div class="flex flex-wrap ">
           {data &&
-            data.map((item) => {
+            Object.keys(data).map((key) => {
               return (
                 <NavLink
-                  key={item.id}
+                  key={key}
                   className="lg:w-1/5 md:w-1/2 p-4 w-full"
-                  to={`/restaurant?id=${item.id}`}
+                  to={`/restaurant?id=${key}`}
                 >
-                  <MerchantItem data={item} />
+                  <MerchantItem data={data[key]} />
                 </NavLink>
               )
             })}

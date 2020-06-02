@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import AppHome from './AppHome'
 
-import useSheet from '../../utils/useSheet'
-import { useMerchantList } from '../../services/firebase/apiHook'
-
+import { useMerchant } from '../../contexts'
 const AppHomeContainer = () => {
-  const { data, error, loading } = useMerchantList()
+  const { fetchMerchantList, merchants, error, loading } = useMerchant()
+  useEffect(() => {
+    fetchMerchantList()
+  }, [])
 
   if (error) {
     console.log(error)
@@ -16,7 +17,7 @@ const AppHomeContainer = () => {
     return <div>loading...</div>
   }
 
-  return <AppHome data={data} />
+  return <AppHome data={merchants} />
 }
 
 export default AppHomeContainer

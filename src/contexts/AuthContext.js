@@ -10,7 +10,7 @@ export const AuthProvider = ({ children }) => {
     firebase.auth().onAuthStateChanged(function (user) {
       setUser(user)
     })
-  })
+  }, [])
 
   return (
     <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>

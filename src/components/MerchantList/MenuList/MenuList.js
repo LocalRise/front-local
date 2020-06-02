@@ -3,11 +3,17 @@ import MenuItem from './MenuItem'
 
 const MenuList = ({ data }) => {
   return (
-    <div className="flex flex-wrap mr-1 ml-1">
-      {data &&
-        data.map((val, ind) => {
-          return <MenuItem key={ind} data={val} />
-        })}
+    <div class="container px-5 py-24 mx-auto">
+      <div class="flex flex-wrap -m-4">
+        {data &&
+          data.map((val, ind) => {
+            return (
+              <div className="lg:w-1/4 md:w-1/2 p-4 w-full shadow-md">
+                <MenuItem key={ind} data={val} />
+              </div>
+            )
+          })}
+      </div>
     </div>
   )
 }
