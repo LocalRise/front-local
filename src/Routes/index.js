@@ -1,12 +1,14 @@
 import React from 'react'
 import Main from './Main'
-import { AuthProvider, MerchantProvider } from '../contexts'
+import { AuthProvider, MerchantProvider, CartProvider } from '../contexts'
 
 const RouteApp = () => {
   return (
     <AuthProvider>
       <MerchantProvider>
-        <Main />
+        <CartProvider>
+          <Main />
+        </CartProvider>
       </MerchantProvider>
     </AuthProvider>
   )
