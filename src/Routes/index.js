@@ -1,6 +1,6 @@
 import React from 'react'
 import Main from './Main'
-import { AuthProvider } from '../services/firebase'
+import { AuthProvider } from '../contexts'
 
 const RouteApp = () => {
   return (

@@ -8,17 +8,18 @@ const MerchantList = ({ data }) => {
     <section class="text-gray-700 body-font">
       <div class="container px-5 py-6 mx-auto">
         <div class="flex flex-wrap ">
-          {data.map((item) => {
-            return (
-              <NavLink
-                key={item.id}
-                className="lg:w-1/5 md:w-1/2 p-4 w-full"
-                to={`/restaurant?id=${item.id}`}
-              >
-                <MerchantItem data={item} />
-              </NavLink>
-            )
-          })}
+          {data &&
+            data.map((item) => {
+              return (
+                <NavLink
+                  key={item.id}
+                  className="lg:w-1/5 md:w-1/2 p-4 w-full"
+                  to={`/restaurant?id=${item.id}`}
+                >
+                  <MerchantItem data={item} />
+                </NavLink>
+              )
+            })}
         </div>
       </div>
     </section>

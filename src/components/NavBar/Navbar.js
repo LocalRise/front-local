@@ -1,6 +1,6 @@
 import React from 'react'
 import { SignUpButton, SignInButton } from './index'
-import { useAuth } from '../../services/firebase'
+import { useAuth } from '../../contexts'
 import ProfileDropdown from './ProfileDropdown'
 import { NavLink } from 'react-router-dom'
 
