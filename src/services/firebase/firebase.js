@@ -14,6 +14,8 @@ const firebaseConfig = {
   measurementId: 'G-LKVZE64BVC',
 }
 
+export const PERMISSION_ERRROR = firebase.firestore.FirestoreError
+
 export const getFacebookProvider = () =>
   new firebase.auth.FacebookAuthProvider()
 

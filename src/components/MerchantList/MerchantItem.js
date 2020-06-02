@@ -9,14 +9,14 @@ const MerchantItem = ({ data: { id, name } }) => {
   const mockOpen = 'open'
   return (
     <div>
-      <a className="block relative h-48 rounded overflow-hidden">
+      <div className="block relative h-48 rounded overflow-hidden">
         <img
           alt={shop_name + ' image'}
           className="object-cover object-center w-full h-full block"
           src={res_img}
           loading="lazy"
         />
-      </a>
+      </div>
       <div className="mt-4">
         <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
           {/* CATEGORY */}
