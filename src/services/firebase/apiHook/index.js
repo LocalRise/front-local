@@ -1,3 +1,4 @@
 import useMerchantList from './useMerchantList'
+import useMerchantMenu from './useMerchantMenu'
 
-export { useMerchantList }
+export { useMerchantList, useMerchantMenu }
