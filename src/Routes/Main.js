@@ -18,13 +18,14 @@ const Main = () => {
   return (
     <Router>
       <Navbar setCollapse={setCollapse} className="transition" />
-      {/* <CollapseContainer collapse={false}> */}
-      <Switch>
-        <Route exact path="/restaurant" component={RestaurantIndex} />
-        <Route exact path="/" component={AppHome} />
-        <Route exact path="/signin" exact component={SignInContainer} />
-        <Route exact path="/signup" exact component={SignUpContainer} />
-      </Switch>
+      <div className="pt-16">
+        <Switch>
+          <Route exact path="/restaurant" component={RestaurantIndex} />
+          <Route exact path="/" component={AppHome} />
+          <Route exact path="/signin" exact component={SignInContainer} />
+          <Route exact path="/signup" exact component={SignUpContainer} />
+        </Switch>
+      </div>
       {/* </CollapseContainer>
       <SideBar collapse={false} /> */}
     </Router>
