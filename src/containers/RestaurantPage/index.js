@@ -37,7 +37,6 @@ const IndexPage = ({ location }) => {
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
       <div class="lg:flex -mx-6">
-        <SideBar />
         <div className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
           {/* <ShopCover res_img={res_img} shop_name={shop_name} /> */}
           <div>{/* tabbar Menu|About|Rate/Comment */}</div>
@@ -47,6 +46,7 @@ const IndexPage = ({ location }) => {
           </p>
           <MenuList data={menu} handleSelect={handleSelect} />
         </div>
+        <SideBar />
       </div>
     </div>
   )

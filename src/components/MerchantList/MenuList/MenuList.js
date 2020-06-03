@@ -8,7 +8,7 @@ const MenuList = ({ data, handleSelect }) => {
         {data &&
           data.map((val, ind) => {
             return (
-              <div className="lg:w-1/4 md:w-1/2 p-4 w-full" key={ind}>
+              <div className="lg:w-1/3 md:w-1/2 p-4 w-full" key={ind}>
                 <MenuItem data={val} handleSelect={handleSelect} />
               </div>
             )
