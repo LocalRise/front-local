@@ -1,23 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-
 import AppHome from '../containers/AppHome'
-import { route } from 'next/dist/next-server/server/router'
 import RestaurantIndex from '../containers/RestaurantPage'
 import Navbar from '../components/NavBar/Navbar'
 import { SignInContainer, SignUpContainer } from '../containers/Auth'
-const ExampleContainer = () => <div>Hi</div>
+import styled from 'styled-components'
+import SideBar from '../containers/SideBar'
+
+const CollapseContainer = styled.div`
+  margin-right: ${(props) => (!props.collapse ? `var(--collapse-size)` : 0)};
+  transition: margin-right 0.5s;
+`
 
 const Main = () => {
+  const [collapse, setCollapse] = useState(false)
+
   return (
     <Router>
-      <Navbar />
+      <Navbar setCollapse={setCollapse} className="transition" />
+      {/* <CollapseContainer collapse={false}> */}
       <Switch>
         <Route exact path="/restaurant" component={RestaurantIndex} />
         <Route exact path="/" component={AppHome} />
         <Route exact path="/signin" exact component={SignInContainer} />
         <Route exact path="/signup" exact component={SignUpContainer} />
       </Switch>
+      {/* </CollapseContainer>
+      <SideBar collapse={false} /> */}
     </Router>
   )
 }
