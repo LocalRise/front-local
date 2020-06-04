@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 import useSheet from '../../utils/useSheet'
@@ -7,10 +7,9 @@ import MenuList from '../../components/MerchantList/MenuList'
 import ShopCover from './ShopCover'
 import { useMerchant } from '../../contexts'
 import SideBar from '../SideBar'
+import { MenuModal } from '../../components/Modal'
 
-// import styled from "styled-components"
-
-const IndexPage = ({ location }) => {
+const Merchant = ({ location }) => {
   const {
     menus,
     merchants,
@@ -22,6 +21,8 @@ const IndexPage = ({ location }) => {
 
   const id = new URLSearchParams(location.search).get('id')
 
+  const [openModal, setOpenModal] = useState(false)
+
   useEffect(() => {
     fetchMerchantById(id)
     fetchMerchantMenuById(id)
@@ -31,19 +32,14 @@ const IndexPage = ({ location }) => {
   const menu = menus[id]
 
   const handleSelect = (menuId) => {
-    alert(`${id} ${menuId}`)
+    setOpenModal(true)
   }
 
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
+      <MenuModal open={openModal} handleClose={setOpenModal} menu={{}} />
       <div class="lg:flex -mx-6">
         <div className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
-          {/* <ShopCover res_img={res_img} shop_name={shop_name} /> */}
-          <div>{/* tabbar Menu|About|Rate/Comment */}</div>
-          {/* <AboutDropdown dataMo={dataMo} /> */}
-          <p className="text-2xl font-bold ml-5 md:ml-10 lg:ml-24">
-            รายการอาหาร
-          </p>
           <MenuList data={menu} handleSelect={handleSelect} />
         </div>
         <SideBar />
@@ -52,4 +48,4 @@ const IndexPage = ({ location }) => {
   )
 }
 
-export default IndexPage
+export default Merchant

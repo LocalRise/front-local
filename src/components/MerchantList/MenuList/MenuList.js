@@ -3,7 +3,7 @@ import MenuItem from './MenuItem'
 
 const MenuList = ({ data, handleSelect }) => {
   return (
-    <div className="container px-5 py-24 mx-auto">
+    <div className="container p-5 mx-auto">
       <div className="flex flex-wrap -m-4">
         {data &&
           data.map((val, ind) => {
