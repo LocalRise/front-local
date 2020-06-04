@@ -5,7 +5,6 @@ import Merchant from '../containers/Merchant'
 import Navbar from '../components/NavBar/Navbar'
 import { SignInContainer, SignUpContainer } from '../containers/Auth'
 import styled from 'styled-components'
-import SideBar from '../containers/SideBar'
 
 const Main = () => {
   return (
@@ -19,8 +18,6 @@ const Main = () => {
           <Route exact path="/signup" exact component={SignUpContainer} />
         </Switch>
       </div>
-      {/* </CollapseContainer>
-      <SideBar collapse={false} /> */}
     </Router>
   )
 }

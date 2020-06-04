@@ -1,5 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react'
 
+import usePersistedState from '../hooks/usePersistedState'
+
 /**
  * cart format =>
  * {
@@ -11,8 +13,8 @@ import React, { useState, useContext, useEffect } from 'react'
 export const CartContext = React.createContext({})
 export const useCart = () => useContext(CartContext)
 export const CartProvider = ({ children }) => {
-  const [order, setOrder] = useState({})
-  const [merchant, setMerchant] = useState(null)
+  const [order, setOrder] = usePersistedState('order', {})
+  const [merchant, setMerchant] = usePersistedState('merchant', null)
 
   const actionCart = (merchantId) => {
     if (merchant === merchantId) return

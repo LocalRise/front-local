@@ -1,5 +1,4 @@
 import React from 'react'
-import { mapByRestaurant } from '../../utils/mapSheet'
 import MerchantItem from './MerchantItem'
 import { NavLink } from 'react-router-dom'
 

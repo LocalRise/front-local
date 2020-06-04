@@ -6,10 +6,10 @@ const MenuList = ({ data, handleSelect }) => {
     <div className="container p-5 mx-auto">
       <div className="flex flex-wrap -m-4">
         {data &&
-          data.map((val, ind) => {
+          Object.keys(data).map((key, ind) => {
             return (
-              <div className="lg:w-1/3 md:w-1/2 p-4 w-full" key={ind}>
-                <MenuItem data={val} handleSelect={handleSelect} />
+              <div className="lg:w-1/3 md:w-1/2 p-4 w-full" key={data[key].id}>
+                <MenuItem data={data[key]} handleSelect={handleSelect} />
               </div>
             )
           })}

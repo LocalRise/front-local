@@ -1,6 +1,4 @@
 import React from 'react'
-import useSheet from '../../utils/useSheet'
-import { mapByResDetail } from '../../utils/mapSheet'
 
 const MerchantItem = ({ data: { id, image, tel, name } }) => {
   return (

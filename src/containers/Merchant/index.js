@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import useSheet from '../../utils/useSheet'
 import AboutDropdown from './AboutDropdown'
 import MenuList from '../../components/MerchantList/MenuList'
 import ShopCover from './ShopCover'
-import { useMerchant } from '../../contexts'
-import SideBar from '../SideBar'
+import { useMerchant, useCart } from '../../contexts'
+import { SideBarCart } from '../SideBar'
 import { MenuModal } from '../../components/Modal'
 
 const Merchant = ({ location }) => {
@@ -18,6 +17,8 @@ const Merchant = ({ location }) => {
     fetchMerchantById,
     fetchMerchantMenuById,
   } = useMerchant()
+
+  const { addItem, order } = useCart()
 
   const id = new URLSearchParams(location.search).get('id')
 
@@ -39,7 +40,7 @@ const Merchant = ({ location }) => {
 
   const handleAddItem = (itemId, amount) => {
     setOpenModal(false)
-    console.log(id, itemId, amount)
+    addItem(id, itemId, parseInt(amount))
   }
 
   const handleClose = () => {
@@ -47,7 +48,7 @@ const Merchant = ({ location }) => {
   }
 
   const getMenuFromId = (id) => {
-    if (menu) return menu.find((item) => item.id === id)
+    if (menu && id) return menu[id]
   }
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
@@ -61,7 +62,7 @@ const Merchant = ({ location }) => {
         <div className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
           <MenuList data={menu} handleSelect={handleSelect} />
         </div>
-        <SideBar />
+        <SideBarCart order={order} menu={menu} />
       </div>
     </div>
   )

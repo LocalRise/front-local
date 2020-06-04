@@ -29,7 +29,6 @@ export const MerchantProvider = ({ children }) => {
   }
 
   const fetchMerchantById = async (id) => {
-    console.log('merchant')
     setLoading(true)
     try {
       const doc = await firestore.collection('RestaurantsDB').doc(id).get()
@@ -50,7 +49,6 @@ export const MerchantProvider = ({ children }) => {
   }
 
   const fetchMerchantMenuById = async (id) => {
-    console.log('menu')
     setLoading(true)
     try {
       const querySnapshot = await firestore
@@ -58,14 +56,15 @@ export const MerchantProvider = ({ children }) => {
         .doc(id)
         .collection('MenuItem')
         .get()
-      const snapshots = querySnapshot.docs.map((doc) => {
-        return {
+      const result = {}
+      querySnapshot.docs.forEach((doc) => {
+        result[doc.id] = {
           id: doc.id,
           ...doc.data(),
         }
       })
       setMenus((prev) => {
-        return { ...prev, [id]: snapshots }
+        return { ...prev, [id]: result }
       })
     } catch (e) {
       setError(e)
