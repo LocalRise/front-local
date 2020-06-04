@@ -7,8 +7,13 @@ const Modal = ({ open, handleClose, children }) => {
         {children}
       </div>
       <div
-        className="fixed bg-black w-full h-full top-0 left-0 opacity-25 "
-        onClick={() => handleClose(false)}
+        className={`fixed bg-black w-full h-full top-0 left-0 opacity-25 ${
+          open ? '' : 'hidden'
+        }`}
+        style={{
+          transition: '1s ease-in',
+        }}
+        onClick={() => handleClose()}
       />
       >
     </div>

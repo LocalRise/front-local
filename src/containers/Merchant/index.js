@@ -22,7 +22,7 @@ const Merchant = ({ location }) => {
   const id = new URLSearchParams(location.search).get('id')
 
   const [openModal, setOpenModal] = useState(false)
-  const [selectedMenu, setSelectedMenu] = useState({})
+  const [selectedMenu, setSelectedMenu] = useState()
 
   useEffect(() => {
     fetchMerchantById(id)
@@ -34,18 +34,28 @@ const Merchant = ({ location }) => {
 
   const handleSelect = (menuId) => {
     setOpenModal(true)
-    setSelectedMenu(getMenuFromId(menuId))
+    setSelectedMenu(menuId)
+  }
+
+  const handleAddItem = (itemId, amount) => {
+    setOpenModal(false)
+    console.log(id, itemId, amount)
+  }
+
+  const handleClose = () => {
+    setOpenModal(false)
   }
 
   const getMenuFromId = (id) => {
-    return menu.find((item) => item.id === id)
+    if (menu) return menu.find((item) => item.id === id)
   }
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
       <MenuModal
         open={openModal}
-        handleClose={setOpenModal}
-        data={selectedMenu}
+        handleClose={handleClose}
+        data={getMenuFromId(selectedMenu)}
+        handleAddItem={handleAddItem}
       />
       <div class="lg:flex -mx-6">
         <div className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
