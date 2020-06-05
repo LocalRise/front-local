@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 import AboutDropdown from './AboutDropdown'
 import MenuList from '../../components/MerchantList/MenuList'
@@ -8,7 +8,8 @@ import { useMerchant, useCart } from '../../contexts'
 import { SideBarCart } from '../SideBar'
 import { MenuModal } from '../../components/Modal'
 
-const Merchant = ({ location }) => {
+const Merchant = () => {
+  const { id } = useParams()
   const {
     menus,
     merchants,
@@ -19,8 +20,6 @@ const Merchant = ({ location }) => {
   } = useMerchant()
 
   const { addItem, order } = useCart()
-
-  const id = new URLSearchParams(location.search).get('id')
 
   const [openModal, setOpenModal] = useState(false)
   const [selectedMenu, setSelectedMenu] = useState()

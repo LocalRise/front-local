@@ -12,7 +12,7 @@ const Main = () => {
       <Navbar />
       <div className="pt-16">
         <Switch>
-          <Route exact path="/restaurant" component={Merchant} />
+          <Route exact path="/merchant/:id/" component={Merchant} />
           <Route exact path="/" component={AppHome} />
           <Route exact path="/signin" exact component={SignInContainer} />
           <Route exact path="/signup" exact component={SignUpContainer} />

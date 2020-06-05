@@ -13,7 +13,7 @@ const MerchantList = ({ data }) => {
                 <NavLink
                   key={key}
                   className="lg:w-1/5 md:w-1/2 p-4 w-full"
-                  to={`/restaurant?id=${key}`}
+                  to={`/merchant/${key}/`}
                 >
                   <MerchantItem data={data[key]} />
                 </NavLink>
