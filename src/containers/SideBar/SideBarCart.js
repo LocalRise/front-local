@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import styled from 'styled-components'
 import Loader from '../../components/Loader'
+import { Link } from 'react-router-dom'
 
 const Container = ({ children }) => {
   return (
@@ -12,7 +13,7 @@ const Container = ({ children }) => {
     </div>
   )
 }
-const SideBarCart = ({ setCollapse, loading, collapse, order, menu }) => {
+const SideBarCart = ({ merchantId, loading, order, menu }) => {
   const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
@@ -57,9 +58,11 @@ const SideBarCart = ({ setCollapse, loading, collapse, order, menu }) => {
         <span class="title-font font-medium text-2xl text-gray-900">
           {totalPrice && totalPrice}
         </span>
-        <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
-          ชำระเงิน
-        </button>
+        <Link to={`/checkout/${merchantId}/`}>
+          <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+            ชำระเงิน
+          </button>
+        </Link>
       </div>
     </Container>
   )

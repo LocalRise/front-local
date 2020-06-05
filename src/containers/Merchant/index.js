@@ -61,7 +61,12 @@ const Merchant = () => {
         <div className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
           <MenuList data={menu} handleSelect={handleSelect} />
         </div>
-        <SideBarCart loading={loading} order={order} menu={menu} />
+        <SideBarCart
+          merchantId={id}
+          loading={loading}
+          order={order}
+          menu={menu}
+        />
       </div>
     </div>
   )
