@@ -10,9 +10,11 @@ const LoaderStyled = styled.div`
   animation: ${spinner} 1.5s linear infinite;
 `
 
-const Loader = () => {
+const Loader = ({ className }) => {
   return (
-    <LoaderStyled class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-64 w-64"></LoaderStyled>
+    <LoaderStyled
+      className={`ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mx-auto`}
+    ></LoaderStyled>
   )
 }
 

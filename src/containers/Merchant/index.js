@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 import AboutDropdown from './AboutDropdown'
 import MenuList from '../../components/MerchantList/MenuList'
@@ -61,7 +61,7 @@ const Merchant = () => {
         <div className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
           <MenuList data={menu} handleSelect={handleSelect} />
         </div>
-        <SideBarCart order={order} menu={menu} />
+        <SideBarCart loading={loading} order={order} menu={menu} />
       </div>
     </div>
   )
