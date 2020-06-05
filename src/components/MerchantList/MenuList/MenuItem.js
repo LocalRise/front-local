@@ -19,13 +19,13 @@ const MenuItem = ({
         </div>
       )}
       <div className="mt-2 p-2">
-        <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
+        {/* <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
           CATEGORY
-        </h3>
+        </h3> */}
         <h2 className="text-gray-900 title-font text-lg font-medium">
           {menuName}
         </h2>
-        <p className="mt-1">{menuPrice}</p>
+        <p className="mt-1">{menuPrice} THB</p>
       </div>
     </div>
     // <div
