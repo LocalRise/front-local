@@ -1,6 +1,6 @@
-import MapComponent from './MapComponent'
-// import getGeolocation from './Geolocated'
+import MapContainer from './MapComponent'
 
-// export default getGeolocation
-export { MapComponent }
-export default MapComponent
+const API_KEY = "AIzaSyCKxtEALdUPF6aqdV3GHywA5t4_ZlvpWiQ";
+
+export { MapContainer, API_KEY }
+export default MapContainer

@@ -8,11 +8,13 @@ import {
 } from "react-google-maps";
 import ReactLoading from "react-loading";
 import { geolocated } from "react-geolocated";
+import { API_KEY } from './index'
+import Distance from "./Distance"
 
-const MyMapComponent = compose(
+const MapComponent = compose(
     withProps({
         googleMapURL:
-            "https://maps.googleapis.com/maps/api/js?key=AIzaSyCKxtEALdUPF6aqdV3GHywA5t4_ZlvpWiQ&v=3.exp&libraries=geometry,drawing,places",
+            `https://maps.googleapis.com/maps/api/js?key=${API_KEY}&v=3.exp&libraries=geometry,drawing,places`,
         loadingElement: <div style={{ height: `100%` }} />,
         containerElement: <div style={{ height: `400px` }} />,
         mapElement: <div style={{ height: `100%` }} />
@@ -52,33 +54,32 @@ const MyMapComponent = compose(
                 onPositionChanged={props.onPositionChanged}
             />
         )}
-        {console.log("props ", props.lat, props.lng)}
     </GoogleMap>
 ));
 
-class MyParentComponentWrapper extends React.PureComponent {
+class MapContainer extends React.PureComponent {
     state = {
         isMarkerShown: false
     };
 
     render() {
         return !this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled ? (
-            <div>
-                <MyMapComponent isMarkerShown={true} lat={18.288966} lng={99.491665} />
+            <div className="rounded-lg overflow-hidden">
+                <MapComponent isMarkerShown={true} lat={18.288966} lng={99.491665} />
             </div>
         ) : this.props.coords ? (
-            <div>
-                <MyMapComponent isMarkerShown={true} lat={this.props.coords.latitude} lng={this.props.coords.longitude} />
+            <div className="rounded-lg overflow-hidden">
+                <MapComponent isMarkerShown={true} lat={this.props.coords.latitude} lng={this.props.coords.longitude} />
             </div>
         ) : (
-            <div class="relative w-full max-w-screen-xl mx-4" style={{ height: `400px` }}>
-                <MyMapComponent isMarkerShown={false} />
-                <div class="absolute inset-0 flex items-center justify-center bg-black w-full max-w-screen-xl bg-opacity-25" style={{ height: `400px` }}></div>
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <ReactLoading type={"spin"} color="#009BFF" className="" />
-                </div>
-            </div>
-        );
+                    <div class="relative w-full max-w-screen-xl mx-4 rounded-lg overflow-hidden" style={{ height: `400px` }}>
+                        <MapComponent isMarkerShown={false} />
+                        <div class="absolute inset-0 flex items-center justify-center bg-black w-full max-w-screen-xl bg-opacity-25" style={{ height: `400px` }}></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <ReactLoading type={"spin"} color="#009BFF" className="" />
+                        </div>
+                    </div>
+                );
     }
 }
 
@@ -87,4 +88,4 @@ export default geolocated({
         enableHighAccuracy: true
     },
     userDecisionTimeout: 5000
-})(MyParentComponentWrapper);
+})(MapContainer);
