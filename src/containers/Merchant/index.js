@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import AboutDropdown from './AboutDropdown'
+import About from './About'
 import MenuList from '../../components/MerchantList/MenuList'
-import ShopCover from './ShopCover'
+import Cover from './Cover'
 import { useMerchant, useCart } from '../../contexts'
 import { SideBarCart } from '../SideBar'
 import { MenuModal } from '../../components/Modal'
@@ -51,6 +51,12 @@ const Merchant = () => {
   }
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
+      {merchant &&
+        <div className="-ml-6">
+          <Cover merchant={merchant} />
+          <About merchant={merchant} />
+        </div>
+      }
       <MenuModal
         open={openModal}
         handleClose={handleClose}
