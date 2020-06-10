@@ -8,9 +8,15 @@ import {
 } from "react-google-maps";
 import ReactLoading from "react-loading";
 import { geolocated } from "react-geolocated";
-import { API_KEY } from './index'
 import Distance from "./Distance"
 
+const API_KEY = "AIzaSyCKxtEALdUPF6aqdV3GHywA5t4_ZlvpWiQ";
+
+export { API_KEY }
+
+const defaultZoom = 5
+const defaultCenter = { lat: 13.736717, lng: 100.523186 }
+const defaultLampange = { lat: 18.288966, lng: 99.491665 }
 const MapComponent = compose(
     withProps({
         googleMapURL:
@@ -40,15 +46,15 @@ const MapComponent = compose(
     withGoogleMap
 )(props => (
     <GoogleMap
-        defaultZoom={13}
-        defaultCenter={{ lat: 18.288966, lng: 99.491665 }}
+        options={{ streetViewControl: false }}
+        defaultZoom={defaultZoom}
+        defaultCenter={defaultCenter}
+        zoom={props.zoom ? props.zoom : defaultZoom}
+        center={props.posit ? props.posit : defaultCenter}
     >
         {props.isMarkerShown && (
             <Marker
-                position={{
-                    lat: props.lat,
-                    lng: props.lng
-                }}
+                position={props.posit}
                 draggable={true}
                 ref={props.onMarkerMounted}
                 onPositionChanged={props.onPositionChanged}
@@ -65,14 +71,14 @@ class MapContainer extends React.PureComponent {
     render() {
         return !this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled ? (
             <div className="rounded-lg overflow-hidden">
-                <MapComponent isMarkerShown={true} lat={18.288966} lng={99.491665} />
+                <MapComponent isMarkerShown={true} posit={defaultLampange} zoom={12} />
             </div>
         ) : this.props.coords ? (
             <div className="rounded-lg overflow-hidden">
-                <MapComponent isMarkerShown={true} lat={this.props.coords.latitude} lng={this.props.coords.longitude} />
+                <MapComponent isMarkerShown={true} posit={{ lat: this.props.coords.latitude, lng: this.props.coords.longitude }} zoom={16} />
             </div>
         ) : (
-                    <div class="relative w-full max-w-screen-xl mx-4 rounded-lg overflow-hidden" style={{ height: `400px` }}>
+                    <div class="relative w-full max-w-screen-xl rounded-lg overflow-hidden" style={{ height: `400px` }}>
                         <MapComponent isMarkerShown={false} />
                         <div class="absolute inset-0 flex items-center justify-center bg-black w-full max-w-screen-xl bg-opacity-25" style={{ height: `400px` }}></div>
                         <div class="absolute inset-0 flex items-center justify-center">
