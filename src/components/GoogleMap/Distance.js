@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Axios from "axios"
-import distance from 'google-distance-matrix'
+// import distance from 'google-distance-matrix'
 import { API_KEY } from './index'
 // `https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=${latOrg},${lngOrg}&destinations=${latDtn},${lngDtn}&key=${API_KEY}`
 // https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins=18.288966,99.491665&destinations=18.282498,99.472319&key=AIzaSyCKxtEALdUPF6aqdV3GHywA5t4_ZlvpWiQ

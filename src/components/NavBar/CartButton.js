@@ -6,7 +6,8 @@ const CartButton = ({ history, render, setCollapse }) => {
   return (
     <div
       onClick={() => {
-        setCollapse((prev) => !prev)
+        // setCollapse((prev) => !prev)
+        console.log('cart clicked');
       }}
     >
       {render ? (
