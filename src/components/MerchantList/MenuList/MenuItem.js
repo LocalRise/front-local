@@ -29,19 +29,19 @@ const MenuItem = ({
     //   </div>
     // </div>
     <div
-      class={` w-full flex border-b border-grey-light ${
-        menuImage === '' ? 'h-16' : ''
-        } md:my-2 mx-auto md:rounded-r md:shadow-md md:border-0`}
+      class={` w-full flex border-b border-grey-light focus:outline-none hover:bg-gray-200 ${
+        menuImage === '' ? 'h-24' : ''
+        } md:my-2 mx-auto md:rounded-r md:shadow-md md:border-0 h-24`}
       onClick={() => handleSelect(id)}
     >
       {menuImage && (
         <div
-          class="m-1 h-20 w-1/4 flex-none bg-cover rounded text-center overflow-hidden"
+          class="m-1 h-20 w-1/4 flex-none bg-cover rounded text-center overflow-hidden mt-2"
           style={{ backgroundImage: `url('${menuImage}')` }}
         ></div>
       )}
       <div class="w-full mb-1 border-grey-light rounded-b flex flex-col justify-between leading-normal relative" >
-        <div class="text-black font-normal text-xl ">{menuName}</div>
+        <div class="text-black font-normal text-xl ml-5 mt-5">{menuName}</div>
         {/* <p class="text-grey-darker text-base">{description}</p> */}
         <div className="absolute bottom-0 right-0 pr-3">{menuPrice} ฿</div>
       </div>

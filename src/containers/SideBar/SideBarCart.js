@@ -39,6 +39,7 @@ const SideBarCart = ({ merchantId, loading, order, menu }) => {
   return (
     <Container>
       <div class="flex flex-col p-5">
+        <p class="mb-2">รายการสั่งซื้อ</p>
         {order &&
           menu &&
           Object.keys(order).map((menuId) => {
@@ -55,11 +56,11 @@ const SideBarCart = ({ merchantId, loading, order, menu }) => {
               </div>
             )
           })}
-        <span class="title-font font-medium text-2xl text-gray-900">
-          {totalPrice && totalPrice}
+        <span class="title-font font-medium text-2xl text-gray-900 text-center">
+          รวม {totalPrice && totalPrice} บาท
         </span>
         <Link to={`/checkout/${merchantId}/`}>
-          <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+          <button class="flex ml-auto mr-auto mt-3 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
             ชำระเงิน
           </button>
         </Link>
