@@ -20,6 +20,7 @@ const SideBarCart = ({ merchantId, loading, order, menu }) => {
     if (!menu || !menu) return
     let total = 0
     Object.keys(order).map((menuId) => {
+      if (!menu[menuId] || !order[menuId]) return
       const price = menu[menuId].menuPrice * order[menuId]
       console.log(price, menu[menuId])
       total += price
@@ -43,7 +44,8 @@ const SideBarCart = ({ merchantId, loading, order, menu }) => {
         {order &&
           menu &&
           Object.keys(order).map((menuId) => {
-            if (!menu[menuId] && !order[menuId]) return
+            console.log('----', menu, menuId)
+            if (!menu[menuId] || !order[menuId]) return
             const { menuName } = menu[menuId]
             const amount = order[menuId]
             return (

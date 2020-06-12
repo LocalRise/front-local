@@ -3,8 +3,12 @@ import { useMerchant, useCart, CartContext } from '../../contexts'
 
 
 const CheckoutList = () => {
-const { merchants, fetchMerchantById } = useMerchant()
-  const cart = useContext(CartContext)
+  const { merchant, order } = useCart()
+  const { fetchMerchantList, merchants, error, loading } = useMerchant()
+  // const {name} = merchants[merchant];
+  useEffect(() => {
+    fetchMerchantList()
+  }, [])
   const deliveryPrice = 30;
 
   return (
@@ -21,7 +25,13 @@ const { merchants, fetchMerchantById } = useMerchant()
             </div>
             <div class="md:flex-grow">
               <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                {cart.merchant}
+                {merchants[merchant].name}
+                {/* <ul>
+                  {order.map(function(item) {
+                    return <li key={item}>{item}</li>;
+                  })}
+                </ul> */}
+                {console.log('++',order)}
               </h2>
               <a class="text-indigo-500 inline-flex items-center mt-4">
                 Learn More

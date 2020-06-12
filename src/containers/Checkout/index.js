@@ -6,8 +6,6 @@ import CheckoutList from './../../components/CheckoutList'
 
 const Checkout = ({ location }) => {
   const id = new URLSearchParams(location.search).get('id')
-  const { merchants, fetchMerchantById } = useMerchant()
-  const cart = useContext(CartContext)
 
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
@@ -22,7 +20,6 @@ const Checkout = ({ location }) => {
       <Map></Map>
       <section class="text-gray-700 body-font">
         <div class="container px-5 py-10 mx-auto">
-          {console.log('merchant : ' + cart.merchant)}
           <CheckoutList></CheckoutList>
         </div>
       </section>
