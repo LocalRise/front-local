@@ -29,7 +29,6 @@ const MapComponent = compose(
                 position: null,
                 onMarkerMounted: ref => {
                     refs.marker = ref;
-                    console.log("hello")
                 },
 
                 onPositionChanged: () => {

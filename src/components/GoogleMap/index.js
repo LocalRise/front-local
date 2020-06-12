@@ -19,36 +19,36 @@ class MapContainer extends Component {
     }
 
     componentDidMount() {
-        
+
     }
 
     render() {
-        const { google } = this.props
-        const service = new google.maps.DistanceMatrixService();
-        const serviceDistance = (org, dest) => {
-            service.getDistanceMatrix(
-                {
-                    origins: [org],
-                    destinations: [dest],
-                    travelMode: "DRIVING"
-                },
-                (response, status) => {
-                    var dst = response.rows[0].elements[0].distance.value
-                    console.log("response", dst);
-                    console.log("status", status);
-                }
-            )
-            // return 5
-        }
-        return !this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled || !this.props.coords ? (
+        // const { google } = this.props
+        // const service = new google.maps.DistanceMatrixService();
+        // const serviceDistance = (org, dest) => {
+        //     service.getDistanceMatrix(
+        //         {
+        //             origins: [org],
+        //             destinations: [dest],
+        //             travelMode: "DRIVING"
+        //         },
+        //         (response, status) => {
+        //             var dst = response.rows[0].elements[0].distance.value
+        //             console.log("response", dst);
+        //             console.log("status", status);
+        //         }
+        //     )
+        //     // return 5
+        // }
+        return !this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled ? (
             <div className="rounded-lg overflow-hidden">
-                <MapComponent isMarkerShown={true} posit={defaultLampange} zoom={12} serviceDistance={serviceDistance}/>
+                <MapComponent isMarkerShown={true} posit={defaultLampange} zoom={12} />
             </div>
-        ) : (
-                <div className="rounded-lg overflow-hidden">
-                    <MapComponent isMarkerShown={true} posit={{ lat: this.props.coords.latitude, lng: this.props.coords.longitude }} zoom={16} serviceDistance={serviceDistance}/>
-                </div>
-            );
+        ) : this.props.coords ? (
+            <div className="rounded-lg overflow-hidden">
+                <MapComponent isMarkerShown={true} posit={{ lat: this.props.coords.latitude, lng: this.props.coords.longitude }} zoom={16} />
+            </div>
+        ) : (<LoadingMap />);
     }
 }
 
@@ -57,7 +57,4 @@ export default geolocated({
         enableHighAccuracy: true
     },
     userDecisionTimeout: 5000
-})(GoogleApiWrapper({
-    apiKey: (API_KEY),
-    LoadingContainer: LoadingMap
-})(MapContainer));
+})(MapContainer);
