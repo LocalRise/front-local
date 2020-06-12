@@ -7,6 +7,7 @@ import CheckoutList from './../../components/CheckoutList'
 const Checkout = ({ location }) => {
   const id = new URLSearchParams(location.search).get('id')
 
+
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
       <section class="text-gray-700 body-font text-center">
@@ -17,13 +18,14 @@ const Checkout = ({ location }) => {
         </div>
       </section>
       <p class="mx-auto leading-relaxed text-xl text-left mb-5 text-center">Restaurant's Location</p>
-      <Map></Map>
       <section class="text-gray-700 body-font">
         <div class="container px-5 py-10 mx-auto">
           <CheckoutList></CheckoutList>
         </div>
       </section>
     </div>
+    <Map></Map>
+    <Distance />
   )
 }
 

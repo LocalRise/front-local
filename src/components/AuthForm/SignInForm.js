@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { FaFacebook } from 'react-icons/fa'
 
 const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
   const [username, setUsername] = useState('')
@@ -33,7 +34,7 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
           type="password"
         />
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-3">
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
@@ -57,7 +58,9 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
             type="button"
             onClick={() => handleFacebookSignIn()}
           >
-            เข้าสู่ระบบด้วยเฟสบุ๊ค
+            <div className="flex justify-center">
+              <FaFacebook className="mt-1 mr-1"/> เข้าสู่ระบบด้วยเฟสบุ๊ค
+            </div>
           </button>
         </div>
       </div>
