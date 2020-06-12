@@ -1,19 +1,48 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useMerchant, useCart, CartContext } from '../../contexts'
-
+import { useParams } from 'react-router-dom'
 
 const CheckoutList = () => {
-  const { merchant, order } = useCart()
-  const { fetchMerchantList, merchants, error, loading } = useMerchant()
+  // const { merchant, order } = useCart()
+  // const { fetchMerchantList, merchants, error, loading } = useMerchant()
+  const { id } = useParams()
+  const {
+    menus,
+    merchants,
+    loading,
+    error,
+    fetchMerchantById,
+    fetchMerchantMenuById,
+    fetchMerchantList
+  } = useMerchant()
+
+  const { addItem, order } = useCart()
+
+  const merchant = merchants[id]
+  const menu = menus[id]
+  const [totalPrice, setTotalPrice] = useState(0)
+
   // const {name} = merchants[merchant];
   useEffect(() => {
+    fetchMerchantById(id)
+    fetchMerchantMenuById(id)
     fetchMerchantList()
-  }, [])
-  const deliveryPrice = 30;
+    
+    if (!menu || !menu) return
+    let total = 0
+    Object.keys(order).map((menuId) => {
+      if (!menu[menuId] || !order[menuId]) return
+      const price = menu[menuId].menuPrice * order[menuId]
+      console.log(price, menu[menuId])
+      total += price
+    })
+    setTotalPrice(total)
+
+  }, [order,menu])
 
   return (
     <section class="text-gray-700 body-font overflow-hidden">
-      <div class="container px-5 py-24 mx-auto">
+      <div class="container px-5 py-20 mx-auto">
         <p class="mx-auto leading-relaxed text-xl text-left mb-5 text-center">Billing Information</p>
         <div class="-my-8">
           <div class="py-8 flex flex-wrap md:flex-no-wrap">
@@ -25,13 +54,7 @@ const CheckoutList = () => {
             </div>
             <div class="md:flex-grow">
               <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                {merchants[merchant].name}
-                {/* <ul>
-                  {order.map(function(item) {
-                    return <li key={item}>{item}</li>;
-                  })}
-                </ul> */}
-                {console.log('++',order)}
+                {merchant.name}
               </h2>
               <a class="text-indigo-500 inline-flex items-center mt-4">
                 Learn More
@@ -58,12 +81,29 @@ const CheckoutList = () => {
             </div>
             <div class="md:flex-grow">
               <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                {/* {cart.order} */}
-                - list 1
+                {order &&
+                  menu &&
+                  Object.keys(order).map((menuId) => {
+                    console.log('----', menu, menuId)
+                    if (!menu[menuId] || !order[menuId]) return
+                    const { menuName, menuPrice} = menu[menuId]
+                    const amount = order[menuId]
+                    return (
+                      <div key={menuId}>
+                        {/* <p class="text-xl mb-4">{menuName}</p> */}
+                        <div class="flex border-b border-gray-300 py-2">
+                          <span class="text-xl">{menuName} ({menuPrice} บาท)</span>
+                          <span class="ml-auto text-gray-900 text-lg">จำนวน {amount} รายการ</span>
+                        </div>
+                        <div class="flex border-b mb-6 border-gray-300 py-2">
+                          <span class="text-gray-500 text-lg">รวม</span>
+                          <span class="ml-auto text-gray-900 text-xl">{amount*menuPrice} บาท</span>
+                        </div>
+                      </div>
+                    )
+                  })}
               </h2>
-              <p class="leading-relaxed">
-                Order list show here
-              </p>
+
             </div>
           </div>
           <div class="py-8 flex border-t-2 border-gray-200 flex-wrap md:flex-no-wrap">
@@ -73,12 +113,16 @@ const CheckoutList = () => {
               </span>
             </div>
             <div class="md:flex-grow">
-              <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                PRICE (THB)
-              </h2>
-              <p class="leading-relaxed">
-                + ค่าส่ง {deliveryPrice} บาท
-              </p>
+              {/* <span class="text-2xl font-medium text-gray-900 title-font mb-2">
+                {totalPrice} (บาท)
+              </span>
+              <span class="text-2xl font-medium text-gray-900 title-font mb-2 ml-auto">
+                {totalPrice} (บาท)
+              </span> */}
+              <div class="flex py-2">
+                <span class="text-gray-500 text-2xl">ราคารวมทั้งสิ้น</span>
+                <span class="ml-auto text-2xl font-medium text-gray-900 title-font text-xl">{totalPrice} บาท</span>
+              </div>
             </div>
           </div>
         </div>
