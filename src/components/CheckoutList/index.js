@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { useMerchant, useCart, CartContext } from '../../contexts'
 import { useParams } from 'react-router-dom'
+import firebase from '../../services/firebase'
 
-const CheckoutList = () => {
-  // const { merchant, order } = useCart()
-  // const { fetchMerchantList, merchants, error, loading } = useMerchant()
+const CheckoutList = ({location}) => {
   const { id } = useParams()
   const {
     menus,
@@ -21,8 +20,8 @@ const CheckoutList = () => {
   const merchant = merchants[id]
   const menu = menus[id]
   const [totalPrice, setTotalPrice] = useState(0)
+  const name = merchant && merchant.name
 
-  // const {name} = merchants[merchant];
   useEffect(() => {
     fetchMerchantById(id)
     fetchMerchantMenuById(id)
@@ -40,21 +39,35 @@ const CheckoutList = () => {
 
   }, [order,menu])
 
+  const addOrder = e => {
+    e.preventDefault();
+    const db = firebase.firestore();
+    const orderRef = db.collection("orders").add({
+      customerId: 5,
+      merchantId: id,
+      orderList: order,
+      totalPrice: totalPrice,
+      location: ''
+    });
+
+    alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
+  };
+
   return (
-    <section class="text-gray-700 body-font overflow-hidden">
-      <div class="container px-5 py-20 mx-auto">
-        <p class="mx-auto leading-relaxed text-xl text-left mb-5 text-center">Billing Information</p>
-        <div class="-my-8">
-          <div class="py-8 flex flex-wrap md:flex-no-wrap">
-            <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-              <span class="tracking-widest font-medium title-font text-gray-900">
+    <section className="text-gray-700 body-font overflow-hidden">
+      <div className="container px-5 py-20 mx-auto">
+        <p className="mx-auto leading-relaxed text-2xl text-left mb-10 text-center">Billing Information</p>
+        <div className="-my-8">
+          <div className="py-8 flex flex-wrap md:flex-no-wrap">
+            <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+              <span className="tracking-widest font-medium title-font text-gray-900">
                 MERCHANT
               </span>
               <span class="mt-1 text-gray-500 text-sm">Restaurant</span>
             </div>
-            <div class="md:flex-grow">
-              <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
-                {merchant.name}
+            <div className="md:flex-grow">
+              <h2 className="text-2xl font-medium text-gray-900 title-font mb-2">
+                {name}
               </h2>
               <a class="text-indigo-500 inline-flex items-center mt-4">
                 Learn More
@@ -73,14 +86,14 @@ const CheckoutList = () => {
               </a>
             </div>
           </div>
-          <div class="py-8 flex border-t-2 border-gray-200 flex-wrap md:flex-no-wrap">
-            <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-              <span class="tracking-widest font-medium title-font text-gray-900">
+          <div className="py-8 flex border-t-2 border-gray-200 flex-wrap md:flex-no-wrap">
+            <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+              <span className="tracking-widest font-medium title-font text-gray-900">
                 ORDER LIST
               </span>
             </div>
-            <div class="md:flex-grow">
-              <h2 class="text-2xl font-medium text-gray-900 title-font mb-2">
+            <div className="md:flex-grow">
+              <h2 className="text-2xl font-medium text-gray-900 title-font mb-2">
                 {order &&
                   menu &&
                   Object.keys(order).map((menuId) => {
@@ -90,45 +103,38 @@ const CheckoutList = () => {
                     const amount = order[menuId]
                     return (
                       <div key={menuId}>
-                        {/* <p class="text-xl mb-4">{menuName}</p> */}
-                        <div class="flex border-b border-gray-300 py-2">
-                          <span class="text-xl">{menuName} ({menuPrice} บาท)</span>
+                        <div className="flex border-b border-gray-300 py-2">
+                          <span className="text-xl">{menuName} ({menuPrice} บาท)</span>
                           <span class="ml-auto text-gray-900 text-lg">จำนวน {amount} รายการ</span>
                         </div>
-                        <div class="flex border-b mb-6 border-gray-300 py-2">
-                          <span class="text-gray-500 text-lg">รวม</span>
-                          <span class="ml-auto text-gray-900 text-xl">{amount*menuPrice} บาท</span>
+                        <div className="flex border-b mb-6 border-gray-300 py-2">
+                          <span className="text-gray-500 text-lg">รวม</span>
+                          <span className="ml-auto text-gray-900 text-xl">{amount*menuPrice} บาท</span>
                         </div>
                       </div>
                     )
                   })}
               </h2>
-
             </div>
           </div>
-          <div class="py-8 flex border-t-2 border-gray-200 flex-wrap md:flex-no-wrap">
-            <div class="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
-              <span class="tracking-widest font-medium title-font text-gray-900">
+          <div className="py-8 flex border-t-2 border-gray-200 flex-wrap md:flex-no-wrap">
+            <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+              <span className="tracking-widest font-medium title-font text-gray-900">
                 PRICE SUMMARY
               </span>
             </div>
-            <div class="md:flex-grow">
-              {/* <span class="text-2xl font-medium text-gray-900 title-font mb-2">
-                {totalPrice} (บาท)
-              </span>
-              <span class="text-2xl font-medium text-gray-900 title-font mb-2 ml-auto">
-                {totalPrice} (บาท)
-              </span> */}
-              <div class="flex py-2">
-                <span class="text-gray-500 text-2xl">ราคารวมทั้งสิ้น</span>
-                <span class="ml-auto text-2xl font-medium text-gray-900 title-font text-xl">{totalPrice} บาท</span>
+            <div className="md:flex-grow">
+              <div className="flex py-2">
+                <span className="text-gray-500 text-2xl">ราคารวมทั้งสิ้น</span>
+                <span className="ml-auto text-2xl font-medium text-gray-900 title-font text-xl">{totalPrice} บาท</span>
               </div>
             </div>
           </div>
         </div>
       </div>
+      <button onClick={addOrder} className="text-white w-full bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Submit Order</button>
     </section>
   )
 }
 
-export default CheckoutList
+export default React.memo(CheckoutList)

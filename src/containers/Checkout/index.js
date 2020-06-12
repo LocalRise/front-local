@@ -9,22 +9,25 @@ const Checkout = ({ location }) => {
 
   return (
     <>
-      <div class="w-full max-w-screen-xl mx-auto px-6">
-        <section class="text-gray-700 body-font text-center bg-gray-800">
-          <div class="container px-5 py-10 mx-auto">
-            <h1 class="sm:text-3xl text-4xl font-bold title-font text-white">
+      <div className="w-full max-w-screen-xl mx-auto px-6">
+        <section className="text-gray-700 body-font text-center bg-gray-800">
+          <div className="container px-5 py-10 mx-auto">
+            <h1 className="sm:text-3xl text-4xl font-bold title-font text-white">
               Checkout
             </h1>
           </div>
         </section>
-        <section class="text-gray-700 body-font">
-          <div class="container px-5 py-10 mx-auto">
-            <CheckoutList></CheckoutList>
+        <p className="mx-auto leading-relaxed text-2xl text-left mb-5 text-center mt-20">Mark your destination</p>
+        <Map></Map>
+        <section className="text-gray-700 body-font">
+          <div className="container px-5 py-10 mx-auto">
+            <CheckoutList location={location}></CheckoutList>
+            {console.log('---',location)}
           </div>
         </section>
+        
       </div>
-      <p class="mx-auto leading-relaxed text-xl text-left mb-5 text-center">Restaurant's Location</p>
-      <Map></Map>
+      
       {/* <Distance /> */}
     </>
   );
