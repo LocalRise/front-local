@@ -15,7 +15,6 @@ const Modal = ({ open, handleClose, children }) => {
         }}
         onClick={() => handleClose()}
       />
-      >
     </div>
   )
 }

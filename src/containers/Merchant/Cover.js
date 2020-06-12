@@ -4,7 +4,7 @@ const ShopCover = ({ merchant:{foodType,id,image,name} }) => {
   return (
     <div className="h-48 w-screen ">
       <div
-        className="absolute right-0 left-0 mt-20 text-center text-3xl font-bold z-30"
+        className="absolute right-0 left-0 mt-24 ml-40 text-left text-5xl font-bold z-30"
         style={{ color: 'white' }}
       >
         {name}
