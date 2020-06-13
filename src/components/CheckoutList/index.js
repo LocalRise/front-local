@@ -30,6 +30,9 @@ const CheckoutList = ({ location, customerLocation }) => {
   const [serviceChargeDistance, setServiceChargeDistance] = useState(0)
   const [distToFixed1, setDistToFixed1] = useState(0)
   // const [serviceChargeCarry, setServiceChargeCarry] = useState(0)
+  // * use with gg sheet
+  const merchantLinkLocation = merchant && merchant.linkLocation
+  const merchantName = merchant && merchant.name
   
 
   useEffect(() => {
@@ -63,6 +66,8 @@ const CheckoutList = ({ location, customerLocation }) => {
       orderList: order,
       totalPrice: totalPrice,
       customerLocation: customerLocation,
+      restaurantLoaction: merchantLinkLocation,
+      restaurantName: merchantName,
       distance: distance,
       serviceChargeDistance: serviceChargeDistance,
     })
