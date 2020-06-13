@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import About from './About'
 import MenuList from '../../components/MerchantList/MenuList'
 import Cover from './Cover'
-import { useMerchant, useCart } from '../../contexts'
+import { useMerchant, useCart, useAuth } from '../../contexts'
 import { SideBarCart } from '../SideBar'
 import { MenuModal } from '../../components/Modal'
 import { AiFillDingtalkCircle } from 'react-icons/ai'
@@ -22,11 +22,13 @@ const Merchant = ({ openCart }) => {
   } = useMerchant()
 
   const { addItem, order, removeItem } = useCart()
+  const { user } = useAuth()
 
   const [openModal, setOpenModal] = useState(false)
   const [selectedMenu, setSelectedMenu] = useState()
 
   useEffect(() => {
+    console.log('---',user)
     fetchMerchantById(id)
     fetchMerchantMenuById(id)
   }, [])
