@@ -7,7 +7,6 @@ import CheckoutList from './../../components/CheckoutList'
 const Checkout = ({ location }) => {
   const id = new URLSearchParams(location.search).get('id')
   const [customerLocation, setCustomerLocation] = useState({ lat: 0, lng: 0 })
-  console.log(customerLocation)
 
   return (
     <>
