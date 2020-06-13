@@ -11,7 +11,7 @@ const SignInContainer = (props) => {
     <div>
       <SignInForm
         handleSignIn={signInWithEmail}
-        handleFacebookSignIn={signInWithFacebook}
+        // handleFacebookSignIn={signInWithFacebook}
       />
     </div>
   )

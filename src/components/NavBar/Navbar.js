@@ -14,24 +14,31 @@ const Navbar = ({ setCollapse, setOpenCart, openCart }) => {
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <NavLink to="/">
           {/* <span className="font-semibold text-xl tracking-tight">HomeRun</span> */}
-          <LogoText/>
+          <LogoText />
         </NavLink>
       </div>
       {user ? (
-        <ProfileDropdown user={user} />
-      ) : (
         <div className="flex">
           <div className="mr-2">
-            <SignUpButton />
-          </div>
-          <div className="mr-2">
-            <SignInButton />
+            <ProfileDropdown user={user} />
           </div>
           <div className="lg:hidden">
             <CartButton setCollapse={setCollapse} setOpenCart={setOpenCart} openCart={openCart} />
           </div>
         </div>
-      )}
+      ) : (
+          <div className="flex">
+            <div className="mr-2">
+              <SignUpButton />
+            </div>
+            <div className="mr-2">
+              <SignInButton />
+            </div>
+            <div className="lg:hidden">
+              <CartButton setCollapse={setCollapse} setOpenCart={setOpenCart} openCart={openCart} />
+            </div>
+          </div>
+        )}
     </nav>
   )
 }
