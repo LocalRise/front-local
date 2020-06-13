@@ -29,9 +29,10 @@ class GetDistance extends Component {
                 },
                 (response, status) => {
                     if (response) {
-                        var dst = response.rows[0].elements[0].distance.value
-                        this.props.setDistance(dst)
-                        console.log(dst)
+                        console.log(response)
+                        // var dst = response.rows[0].elements[0].distance.value
+                        // this.props.setDistance(dst)
+                        // console.log(dst)
                     }
                 }
             )
