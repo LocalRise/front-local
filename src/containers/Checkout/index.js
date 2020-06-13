@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useMerchant, useCart, CartContext } from '../../contexts'
 import Map from './../../components/GoogleMap'
 import CheckoutList from './../../components/CheckoutList'
+import Distance from './../../components/GoogleMap/GetDistance'
 
 const Checkout = ({ location }) => {
   const id = new URLSearchParams(location.search).get('id')
@@ -26,9 +27,9 @@ const Checkout = ({ location }) => {
           <CheckoutList></CheckoutList>
         </div>
       </section>
+      <Map></Map>
+      <Distance />
     </div>
-    <Map></Map>
-    <Distance />
   )
 }
 
