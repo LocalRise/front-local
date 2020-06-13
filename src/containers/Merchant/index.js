@@ -7,9 +7,10 @@ import Cover from './Cover'
 import { useMerchant, useCart } from '../../contexts'
 import { SideBarCart } from '../SideBar'
 import { MenuModal } from '../../components/Modal'
+import { AiFillDingtalkCircle } from 'react-icons/ai'
 
-const Merchant = ({openCart}) => {
-  console.log("this",this,openCart)
+const Merchant = ({ openCart }) => {
+
   const { id } = useParams()
   const {
     menus,
@@ -20,7 +21,7 @@ const Merchant = ({openCart}) => {
     fetchMerchantMenuById,
   } = useMerchant()
 
-  const { addItem, order } = useCart()
+  const { addItem, order, removeItem } = useCart()
 
   const [openModal, setOpenModal] = useState(false)
   const [selectedMenu, setSelectedMenu] = useState()
@@ -40,6 +41,10 @@ const Merchant = ({openCart}) => {
 
   const handleAddItem = (itemId, amount) => {
     setOpenModal(false)
+    addItem(id, itemId, parseInt(amount))
+  }
+
+  const handleRemoveItem = (itemId, amount) => {
     addItem(id, itemId, parseInt(amount))
   }
 
@@ -74,6 +79,7 @@ const Merchant = ({openCart}) => {
           order={order}
           menu={menu}
           openCart={openCart}
+          handleRemoveItem={handleRemoveItem}
         />
       </div>
     </div>

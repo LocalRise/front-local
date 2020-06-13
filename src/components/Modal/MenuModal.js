@@ -21,16 +21,17 @@ const MenuModal = ({ open, handleClose, data = {}, handleAddItem }) => {
   const [amount, setAmount] = useState(1)
 
   const handleSubmit = () => {
-    handleAddItem(id, amount)
+    if (amount > 0) handleAddItem(id, amount)
+    else handleClose(false)
   }
 
   const handleIncress = () => {
-    setAmount(amount + 1)
+    setAmount(parseInt(amount) + 1)
   }
 
   const handleDecress = () => {
     if (amount - 1 >= 1) {
-      setAmount(amount - 1)
+      setAmount(parseInt(amount) - 1)
     }
   }
 
