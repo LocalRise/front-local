@@ -10,7 +10,6 @@ const CartButton = ({ history, render, setCollapse, setOpenCart, openCart }) => 
       onClick={() => {
         // setCollapse((prev) => !prev)
         setOpenCart(!openCart ? true : false)
-        console.log('cart clicked', openCart);
       }}
     >
       {render ? (
