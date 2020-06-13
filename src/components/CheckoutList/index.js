@@ -60,12 +60,12 @@ const CheckoutList = ({ location, customerLocation }) => {
   };
 
   return (
-    <section className="text-gray-700 body-font overflow-hidden">
+    <section className="body-font overflow-hidden">
       <div className="hidden">
         {/* <Distance merchantLocation={merchantLocation} customerLocation={customerLocation} setDistance={setDistance}/> */}
       </div>
       <div className="container px-5 py-20 mx-auto">
-        <p className="mx-auto leading-relaxed text-2xl text-left mb-10 text-center">ข้อมูลการชำระเงิน</p>
+        <p className="mx-auto leading-relaxed text-2xl text-left mb-10 text-center font-bold text-gray-700 ">ข้อมูลการชำระเงิน</p>
         <div className="-my-8">
           <div className="py-8 flex flex-wrap md:flex-no-wrap">
             <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
@@ -160,7 +160,8 @@ const CheckoutList = ({ location, customerLocation }) => {
           </div>
         </div>
       </div>
-      <button onClick={addOrder} className="text-white w-full bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">สั่งอาหาร</button>
+      <button onClick={addOrder} className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg">
+        สั่งอาหาร</button>
     </section>
   )
 }

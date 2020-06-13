@@ -62,7 +62,7 @@ const SideBarCart = ({ merchantId, loading, order, menu, openCart }) => {
           รวม {totalPrice && totalPrice} บาท
         </span>
         <Link to={`/checkout/${merchantId}/`}>
-          <button class="flex ml-auto mr-auto mt-3 text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">
+          <button class="flex ml-auto mr-auto mt-3 text-white font-bold bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded">
             ชำระเงิน
           </button>
         </Link>

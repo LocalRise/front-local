@@ -62,7 +62,7 @@ const About = ({ merchant:{description,facebook,foodType,id,image,location,name,
               ref={popoverDropdownRef}
               className={
                 (dropdownPopoverShow ? 'block ' : 'hidden ') +
-                'bg-white text-base z-40 float-right py-2 list-none text-left rounded shadow-xl mt-1 w-full mt-10'
+                'bg-white text-base z-40 float-right py-2 list-none text-left rounded shadow-xl mt-1 w-full mt-5'
               }
               style={{ minWidth: '12rem' }}
             >
@@ -114,13 +114,13 @@ const About = ({ merchant:{description,facebook,foodType,id,image,location,name,
 
               <div className="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25" />
 
-              {openingTime && (
+              {/* {openingTime && (
                 <p className="text-base py-2 px-4 font-normal block w-full bg-transparent text-gray-800 w-full flex flex-warp">
                   <MdAccessTime
                     style={{ fontSize: '1.6em', margin: '0 20px 0 0' }}
                   />{' '}
                 </p>
-              )}
+              )} */}
               <p
                 className={
                   'text-sm py-2 px-4 font-normal block w-full bg-transparent text-gray-800 w-full flex flex-warp'

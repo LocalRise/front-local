@@ -19,7 +19,7 @@ const Checkout = ({ location }) => {
             </h1>
           </div>
         </section>
-        <p className="mx-auto leading-relaxed text-2xl text-left mb-10 text-center mt-10">เลือกสถานที่ส่ง</p>
+        <p className="mx-auto font-bold leading-relaxed text-2xl text-left mb-10 text-center mt-10 text-gray-700 ">เลือกสถานที่ส่ง</p>
         <Map setCustomerLocation={setCustomerLocation}></Map>
         <section className="text-gray-700 body-font">
           <div className="container px-5 py-10 mx-auto">
