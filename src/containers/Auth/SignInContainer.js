@@ -21,7 +21,7 @@ const SignInContainer = () => {
       <SignInForm
         error={error}
         handleSignIn={handleSignIn}
-        // handleFacebookSignIn={signInWithFacebook}
+        handleFacebookSignIn={signInWithFacebook}
       />
     </div>
   )

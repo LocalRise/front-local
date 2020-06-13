@@ -30,7 +30,7 @@ const CheckoutList = ({ location, customerLocation }) => {
   const [serviceChargeDistance, setServiceChargeDistance] = useState(0)
   const [distToFixed1, setDistToFixed1] = useState(0)
   // const [serviceChargeCarry, setServiceChargeCarry] = useState(0)
-
+  
 
   useEffect(() => {
     // fetchMerchantById(id)
@@ -49,10 +49,15 @@ const CheckoutList = ({ location, customerLocation }) => {
     setTotalPrice(total)
   }, [order, menu])
 
+  let d = new Date();
+  let nd = d.toLocaleDateString().split("/");
+  let today = nd[1] + "/" + nd[0] + "/" + nd[2]
+
   const addOrder = (e) => {
     // e.preventDefault()
     const db = firebase.firestore()
     const orderRef = db.collection('orders').add({
+      Date: today,
       customerId: 5,
       merchantId: id,
       orderList: order,

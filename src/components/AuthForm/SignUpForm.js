@@ -29,7 +29,7 @@ const SignUpForm = ({ handleSignUp }) => {
           id="email"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Username"
+          placeholder="Email"
         />
       </div>
       <div className="mb-6">
@@ -44,6 +44,7 @@ const SignUpForm = ({ handleSignUp }) => {
           id="password"
           onChange={(e) => setPassword(e.target.value)}
           type="password"
+          placeholder="Password"
         />
       </div>
       <div className="mb-6">
@@ -58,6 +59,7 @@ const SignUpForm = ({ handleSignUp }) => {
           id="confirmPassword"
           onChange={(e) => setConfirmPassword(e.target.value)}
           type="password"
+          placeholder="Confirm password"
         />
       </div>
       <div className="mb-4">

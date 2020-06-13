@@ -4,7 +4,7 @@ import { signOut } from '../../services/firebase'
 
 
 const CartButton = ({ history, render, setCollapse, setOpenCart, openCart }) => {
-  // const [openCart, setOpenCart] = useState(false)
+  
   return (
     <div
       onClick={() => {
