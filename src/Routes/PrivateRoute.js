@@ -4,11 +4,21 @@ import { useAuth } from '../contexts/AuthContext'
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   const { user } = useAuth()
+  const post = rest?.location?.pathname
   return (
     <Route
       {...rest}
       render={(props) =>
-        user ? <Component {...props} /> : <Redirect to="/signin" />
+        user ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/signin',
+              state: { post },
+            }}
+          />
+        )
       }
     />
   )
