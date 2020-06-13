@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom'
 import firebase from '../../services/firebase'
 import Map from './../GoogleMap'
 import Distance from './../../services/distance'
+import { NavLink } from 'react-router-dom'
+
 
 const CheckoutList = ({ location, customerLocation }) => {
   const { id } = useParams()
@@ -48,7 +50,7 @@ const CheckoutList = ({ location, customerLocation }) => {
   }, [order, menu])
 
   const addOrder = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     const db = firebase.firestore()
     const orderRef = db.collection('orders').add({
       customerId: 5,
@@ -186,12 +188,14 @@ const CheckoutList = ({ location, customerLocation }) => {
       </div>
       {distance != 0 ?
         (
-          <button
-            onClick={addOrder}
-            className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
-          >
-            สั่งอาหาร
+          <NavLink to="/">
+            <button
+              onClick={addOrder}
+              className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
+            >
+              สั่งอาหาร
           </button>
+          </NavLink>
         ) : (
           <button
             className="text-white w-full bg-gray-300 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg"
