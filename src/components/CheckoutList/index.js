@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useMerchant, useCart, CartContext } from '../../contexts'
+import { useMerchant, useCart, useAuth  } from '../../contexts'
 import { useParams } from 'react-router-dom'
 import firebase from '../../services/firebase'
 import Map from './../GoogleMap'
@@ -18,6 +18,7 @@ const CheckoutList = ({ location, customerLocation }) => {
   } = useMerchant()
 
   const { addItem, order } = useCart()
+  const { user } = useAuth()
 
   const merchant = merchants[id]
   const menu = menus[id]
@@ -30,6 +31,7 @@ const CheckoutList = ({ location, customerLocation }) => {
 
   useEffect(() => {
     // fetchMerchantById(id)
+    console.log('++++',user)
     fetchMerchantList()
     if (!menu) fetchMerchantMenuById(id)
 
