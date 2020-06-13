@@ -27,7 +27,7 @@ const Navbar = ({ setCollapse, setOpenCart, openCart }) => {
           <div className="mr-2">
             <SignInButton />
           </div>
-          <div>
+          <div className="lg:hidden">
             <CartButton setCollapse={setCollapse} setOpenCart={setOpenCart} openCart={openCart} />
           </div>
         </div>
