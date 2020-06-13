@@ -22,12 +22,12 @@ const Navbar = ({ setCollapse, setOpenCart, openCart }) => {
           <div className="mr-2">
             <ProfileDropdown user={user} />
           </div>
-          <div className="lg:hidden">
+          <div className="lg:hidden -mt-2">
             <CartButton setCollapse={setCollapse} setOpenCart={setOpenCart} openCart={openCart} />
           </div>
         </div>
       ) : (
-          <div className="flex">
+          <div className="flex -mt-2">
             <div className="mr-2">
               <SignUpButton />
             </div>
