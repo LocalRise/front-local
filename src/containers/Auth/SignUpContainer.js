@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import SignUpForm from '../../components/AuthForm/SignUpForm'
 
-import { signUpWithEmail } from '../../services/firebase'
+import { signUpWithEmail, saveUserData } from '../../services/firebase'
+import withRedirectHOC from './withRedirectHOC'
 
 const SignUpContainer = () => {
-  return <SignUpForm handleSignUp={signUpWithEmail} />
+  const [error, setError] = useState()
+  const handleSignUp = async ({ email, password, ...data }) => {
+    setError(null)
+    try {
+      const res = await signUpWithEmail({ email, password })
+      const {
+        user: { uid },
+      } = res
+      await saveUserData(uid, data)
+    } catch (e) {
+      setError(e)
+    }
+  }
+  return <SignUpForm error={error} handleSignUp={handleSignUp} />
 }
 
-export default SignUpContainer
+export default withRedirectHOC(SignUpContainer)
