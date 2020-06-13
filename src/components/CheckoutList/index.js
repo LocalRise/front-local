@@ -30,11 +30,13 @@ const CheckoutList = ({ location, customerLocation }) => {
 
 
   useEffect(() => {
-    fetchMerchantById(id)
-    fetchMerchantMenuById(id)
+    // fetchMerchantById(id)
     fetchMerchantList()
+    if (!menu)
+      fetchMerchantMenuById(id)
 
     if (!menu || !menu) return
+
     let total = 0
     Object.keys(order).map((menuId) => {
       if (!menu[menuId] || !order[menuId]) return
@@ -44,7 +46,7 @@ const CheckoutList = ({ location, customerLocation }) => {
     })
     setTotalPrice(total)
 
-  }, [order, menu])
+  }, [order,menu])
 
   const addOrder = e => {
     e.preventDefault();
@@ -108,7 +110,7 @@ const CheckoutList = ({ location, customerLocation }) => {
                 {order &&
                   menu &&
                   Object.keys(order).map((menuId) => {
-                    // console.log('----', menu, menuId)
+                    console.log('----', menu, menuId)
                     if (!menu[menuId] || !order[menuId]) return
                     const { menuName, menuPrice } = menu[menuId]
                     const amount = order[menuId]
