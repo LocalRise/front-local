@@ -18,7 +18,7 @@ class MapContainer extends Component {
     }
 
     componentDidMount() {
-        
+
     }
 
     render() {
@@ -41,11 +41,14 @@ class MapContainer extends Component {
         // }
         return !this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled ? (
             <div className="rounded-lg overflow-hidden">
-                <MapComponent isMarkerShown={true} posit={defaultLampange} zoom={12} setCustomerLocation={this.props.setCustomerLocation}/>
+                <MapComponent isMarkerShown={true} posit={defaultLampange} zoom={12} setCustomerLocation={this.props.setCustomerLocation} />
             </div>
         ) : this.props.coords ? (
             <div className="rounded-lg overflow-hidden">
-                <MapComponent isMarkerShown={true} posit={{ lat: this.props.coords.latitude, lng: this.props.coords.longitude }} zoom={16} setCustomerLocation={this.props.setCustomerLocation}/>
+                <MapComponent isMarkerShown={true}
+                    posit={{ lat: this.props.coords.latitude, lng: this.props.coords.longitude }}
+                    zoom={16}
+                    setCustomerLocation={this.props.setCustomerLocation} />
             </div>
         ) : (<LoadingMap />);
     }

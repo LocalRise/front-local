@@ -3,7 +3,9 @@ import { useMerchant, useCart, useAuth  } from '../../contexts'
 import { useParams } from 'react-router-dom'
 import firebase from '../../services/firebase'
 import Map from './../GoogleMap'
-// import Distance from './../../services/distance'
+import Distance from './../../services/distance'
+import { NavLink } from 'react-router-dom'
+
 
 const CheckoutList = ({ location, customerLocation }) => {
   const { id } = useParams()
@@ -27,7 +29,9 @@ const CheckoutList = ({ location, customerLocation }) => {
   const merchantLocation = merchant && merchant.location
   const [distance, setDistance] = useState(0)
   const [serviceChargeDistance, setServiceChargeDistance] = useState(0)
-  const [serviceChargeCarry, setServiceChargeCarry] = useState(0)
+  const [distToFixed1, setDistToFixed1] = useState(0)
+  // const [serviceChargeCarry, setServiceChargeCarry] = useState(0)
+  
 
   useEffect(() => {
     // fetchMerchantById(id)
@@ -46,15 +50,22 @@ const CheckoutList = ({ location, customerLocation }) => {
     setTotalPrice(total)
   }, [order, menu])
 
+  let d = new Date();
+  let nd = d.toLocaleDateString().split("/");
+  let today = nd[1] + "/" + nd[0] + "/" + nd[2]
+
   const addOrder = (e) => {
-    e.preventDefault()
+    // e.preventDefault()
     const db = firebase.firestore()
     const orderRef = db.collection('orders').add({
+      Date: today,
       customerId: 5,
       merchantId: id,
       orderList: order,
       totalPrice: totalPrice,
-      location: customerLocation,
+      customerLocation: customerLocation,
+      distance: distance,
+      serviceChargeDistance: serviceChargeDistance,
     })
 
     alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
@@ -63,7 +74,15 @@ const CheckoutList = ({ location, customerLocation }) => {
   return (
     <section className="body-font overflow-hidden">
       <div className="hidden">
-        {/* <Distance merchantLocation={merchantLocation} customerLocation={customerLocation} setDistance={setDistance}/> */}
+        {merchant &&
+          merchant.location &&
+          customerLocation &&
+          <Distance merchantLocation={merchantLocation}
+            customerLocation={customerLocation}
+            setDistance={setDistance}
+            setDistToFixed1={setDistToFixed1}
+            setServiceChargeDistance={setServiceChargeDistance} />
+        }
       </div>
       <div className="container py-20 mx-auto">
         <p className="mx-auto leading-relaxed text-2xl text-left mb-10 text-center font-bold text-gray-700 ">
@@ -109,7 +128,7 @@ const CheckoutList = ({ location, customerLocation }) => {
                 {order &&
                   menu &&
                   Object.keys(order).map((menuId) => {
-                    console.log('----', menu, menuId)
+                    // console.log('----', menu, menuId)
                     if (!menu[menuId] || !order[menuId]) return
                     const { menuName, menuPrice } = menu[menuId]
                     const amount = order[menuId]
@@ -137,7 +156,7 @@ const CheckoutList = ({ location, customerLocation }) => {
               </h2>
             </div>
           </div>
-          <div className="mb-10 flex-wrap md:flex-no-wrap">
+          <div className="lg:flex mb-10 flex-wrap md:flex-no-wrap">
             <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
               <span className="tracking-widest font-medium title-font text-gray-900 text-2xl">
                 ค่าบริการ
@@ -150,15 +169,13 @@ const CheckoutList = ({ location, customerLocation }) => {
                   {serviceChargeDistance} บาท
                 </span>
               </div>
-              <div className="flex border-b border-gray-300 py-2">
-                <span className="text-xl">ค่าหิ้ว</span>
-                <span className="ml-auto text-gray-900 text-lg">
-                  {serviceChargeCarry} บาท
-                </span>
+              <div className="flex mb-6 py-2 text-gray-500 text-base">
+                <span >ระยะทาง</span>
+                <span className="ml-auto">{distToFixed1} KM </span>
               </div>
             </div>
           </div>
-          <div className="py-8 border-t-2 border-gray-500 flex-wrap md:flex-no-wrap mt-2">
+          <div className="lg:flex py-8 border-t-2 border-gray-500 flex-wrap md:flex-no-wrap mt-2">
             <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
               <span className="tracking-widest font-medium title-font text-gray-900 text-2xl">
                 ราคารวม
@@ -168,19 +185,30 @@ const CheckoutList = ({ location, customerLocation }) => {
               <div className="flex py-2">
                 <span className="text-gray-500 text-2xl">รวมทั้งสิ้น</span>
                 <span className="ml-auto text-2xl font-medium text-gray-900 title-font text-xl">
-                  {totalPrice} บาท
+                  {totalPrice + serviceChargeDistance} บาท
                 </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <button
-        onClick={addOrder}
-        className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
-      >
-        สั่งอาหาร
-      </button>
+      {distance != 0 ?
+        (
+          <NavLink to="/">
+            <button
+              onClick={addOrder}
+              className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
+            >
+              สั่งอาหาร
+          </button>
+          </NavLink>
+        ) : (
+          <button
+            className="text-white w-full bg-gray-300 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg"
+          >
+            สั่งอาหาร
+          </button>)
+      }
     </section>
   )
 }
