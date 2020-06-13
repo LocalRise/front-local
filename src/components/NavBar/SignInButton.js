@@ -9,7 +9,7 @@ const SignInButton = ({ history }) => {
         history.push('/signin')
       }}
     >
-      <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-orange-500 border-orange-500 hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+      <a className="inline-block text-sm px-4 py-2 leading-none border rounded text-orange-500 border-orange-500 hover:border-transparent hover:text-teal-500 hover:font-bold mt-4 lg:mt-0">
         SignIn
       </a>
     </div>

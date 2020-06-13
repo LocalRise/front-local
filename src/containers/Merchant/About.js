@@ -26,7 +26,7 @@ const About = ({ merchant:{description,facebook,foodType,id,image,location,name,
 
   return (
     <>
-      <div className="flex flex-wrap">
+      <div className="flex flex-wrap mb-2">
         <div className="w-full px-3">
           <div className="relative inline-flex align-middle w-full">
             <AiOutlineInfoCircle
@@ -40,7 +40,7 @@ const About = ({ merchant:{description,facebook,foodType,id,image,location,name,
                   : openDropdownPopover()
               }}
             />
-            {/* //! if remove buton below code will error */}
+            {/* //! if remove below button, code will error */}
             <button
               className={
                 'hide'
@@ -62,7 +62,7 @@ const About = ({ merchant:{description,facebook,foodType,id,image,location,name,
               ref={popoverDropdownRef}
               className={
                 (dropdownPopoverShow ? 'block ' : 'hidden ') +
-                'bg-white text-base z-30 float-right py-2 list-none text-left rounded shadow-xl mt-1 w-full ml-6'
+                'bg-white text-base z-40 float-right py-2 list-none text-left rounded shadow-xl mt-1 w-full mt-10'
               }
               style={{ minWidth: '12rem' }}
             >

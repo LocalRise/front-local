@@ -11,9 +11,9 @@ const Checkout = ({ location }) => {
 
   return (
     <>
-      <div className="w-full max-w-screen-xl mx-auto px-6">
-        <section className="text-gray-700 body-font text-center bg-gray-800">
-          <div className="container px-5 py-10 mx-auto">
+      <div className="w-screen mx-auto px-6">
+        <section className="text-gray-700 body-font text-center bg-teal-600">
+          <div className="container px-1 mx-auto">
             <h1 className="sm:text-3xl text-4xl font-bold title-font text-white">
               Checkout
             </h1>
