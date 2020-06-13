@@ -4,7 +4,6 @@ import AppHome from '../containers/AppHome'
 import Merchant from '../containers/Merchant'
 import Navbar from '../components/NavBar/Navbar'
 import { SignInContainer, SignUpContainer } from '../containers/Auth'
-import styled from 'styled-components'
 import Checkout from '../containers/Checkout'
 
 const Main = () => {

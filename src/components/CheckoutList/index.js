@@ -134,7 +134,7 @@ const CheckoutList = ({ location, customerLocation }) => {
               </h2>
             </div>
           </div>
-          <div className="mb-10 flex-wrap md:flex-no-wrap">
+          <div className="lg:flex mb-10 flex-wrap md:flex-no-wrap">
             <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
               <span className="tracking-widest font-medium title-font text-gray-900 text-2xl">
                 ค่าบริการ
@@ -151,7 +151,7 @@ const CheckoutList = ({ location, customerLocation }) => {
               </div>
             </div>
           </div>
-          <div className="py-8 border-t-2 border-gray-500 flex-wrap md:flex-no-wrap mt-2">
+          <div className="lg:flex py-8 border-t-2 border-gray-500 flex-wrap md:flex-no-wrap mt-2">
             <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
               <span className="tracking-widest font-medium title-font text-gray-900 text-2xl">
                 ราคารวม
