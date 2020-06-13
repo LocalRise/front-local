@@ -2,7 +2,6 @@ import React, { useEffect, useState, useContext } from 'react'
 import { useMerchant, useCart, CartContext } from '../../contexts'
 import { useParams } from 'react-router-dom'
 import firebase from '../../services/firebase'
-import Map from './../GoogleMap'
 import Distance from './../../services/distance'
 import { NavLink } from 'react-router-dom'
 
@@ -198,7 +197,7 @@ const CheckoutList = ({ location, customerLocation }) => {
       </div>
       {distance != 0 ?
         (
-          <NavLink to="/">
+          <NavLink to={`/payment/${totalPrice + serviceChargeDistance}/`}>
             <button
               onClick={addOrder}
               className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
