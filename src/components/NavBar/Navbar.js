@@ -4,15 +4,17 @@ import { useAuth } from '../../contexts'
 import ProfileDropdown from './ProfileDropdown'
 import { NavLink } from 'react-router-dom'
 import CartButton from './CartButton'
+import LogoText from './../logo_text'
 
 const Navbar = ({ setCollapse }) => {
   const { user } = useAuth()
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-3 fixed w-full z-50 h-16">
+    <nav className="flex items-center justify-between flex-wrap bg-transparent p-3 fixed w-full z-50 h-16">
       <div className="flex items-center flex-shrink-0 text-white mr-6">
         <NavLink to="/">
-          <span className="font-semibold text-xl tracking-tight">HomeRun</span>
+          {/* <span className="font-semibold text-xl tracking-tight">HomeRun</span> */}
+          <LogoText/>
         </NavLink>
       </div>
       {user ? (
