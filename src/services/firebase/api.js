@@ -1,10 +1,10 @@
 import firebase, { getFacebookProvider } from './firebase'
 
-export async function signInWithEmail(email, password) {
+export async function signInWithEmail({ email, password }) {
   return firebase.auth().signInWithEmailAndPassword(email, password)
 }
 
-export async function signUpWithEmail(email, password) {
+export async function signUpWithEmail({ email, password }) {
   console.log(email, password)
   const user = await firebase
     .auth()

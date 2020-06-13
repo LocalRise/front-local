@@ -8,7 +8,7 @@ import withRedirectHOC from './withRedirectHOC'
 const SignInContainer = () => {
   const handleSignIn = (data) => {
     const { email, password } = data
-    signInWithEmail(email, password)
+    signInWithEmail({ email, password })
   }
   return (
     <div>
