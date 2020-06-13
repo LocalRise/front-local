@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useMerchant, useCart, CartContext } from '../../contexts'
+import { useMerchant, useCart, useAuth  } from '../../contexts'
 import { useParams } from 'react-router-dom'
 import firebase from '../../services/firebase'
 import Distance from './../../services/distance'
@@ -19,6 +19,7 @@ const CheckoutList = ({ location, customerLocation }) => {
   } = useMerchant()
 
   const { addItem, order } = useCart()
+  const { user } = useAuth()
 
   const merchant = merchants[id]
   const menu = menus[id]
@@ -36,6 +37,7 @@ const CheckoutList = ({ location, customerLocation }) => {
 
   useEffect(() => {
     // fetchMerchantById(id)
+    console.log('++++',user)
     fetchMerchantList()
     if (!menu) fetchMerchantMenuById(id)
 
@@ -45,7 +47,6 @@ const CheckoutList = ({ location, customerLocation }) => {
     Object.keys(order).map((menuId) => {
       if (!menu[menuId] || !order[menuId]) return
       const price = menu[menuId].menuPrice * order[menuId]
-      // console.log(price, menu[menuId])
       total += price
     })
     setTotalPrice(total)

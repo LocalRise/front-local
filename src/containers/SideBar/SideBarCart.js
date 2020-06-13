@@ -76,6 +76,7 @@ const SideBarCart = ({ merchantId, loading, order, handleRemoveItem, menu, openC
             ชำระเงิน
           </button>
         </Link>
+
       </div>
     </Container>
   )
