@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FaFacebook } from 'react-icons/fa'
 
 const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   return (
@@ -12,13 +12,14 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
           className="block text-gray-700 text-sm font-bold mb-2"
           for="username"
         >
-          Username
+          Email
         </label>
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          id="username"
-          type="text"
-          placeholder="Username"
+          id="email"
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Email"
         />
       </div>
       <div className="mb-6">
@@ -31,6 +32,7 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
         <input
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700  leading-tight focus:outline-none focus:shadow-outline"
           id="password"
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
         />
       </div>
@@ -39,17 +41,11 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
           onClick={() => {
-            handleSignIn({ username, password })
+            handleSignIn(email, password)
           }}
         >
           Sign In
         </button>
-        <a
-          className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-          href="#"
-        >
-          Forgot Password?
-        </a>
       </div>
       <div class="flex flex-wrap justify-center">
         <div class="w-full sm:w-1/2 sm:pr-2 mb-3 sm:mb-0">
@@ -59,7 +55,7 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
             onClick={() => handleFacebookSignIn()}
           >
             <div className="flex justify-center">
-              <FaFacebook className="mt-1 mr-1"/> เข้าสู่ระบบด้วยเฟสบุ๊ค
+              <FaFacebook className="mt-1 mr-1" /> เข้าสู่ระบบด้วยเฟสบุ๊ค
             </div>
           </button>
         </div>
