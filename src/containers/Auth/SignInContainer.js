@@ -5,12 +5,15 @@ import SignInForm from '../../components/AuthForm/SignInForm'
 import { signInWithEmail, signInWithFacebook } from '../../services/firebase'
 import withRedirectHOC from './withRedirectHOC'
 
-const SignInContainer = (props) => {
-  console.log('signIncontainer', props)
+const SignInContainer = () => {
+  const handleSignIn = (data) => {
+    const { email, password } = data
+    signInWithEmail(email, password)
+  }
   return (
     <div>
       <SignInForm
-        handleSignIn={signInWithEmail}
+        handleSignIn={handleSignIn}
         handleFacebookSignIn={signInWithFacebook}
       />
     </div>
