@@ -8,7 +8,7 @@ const MenuList = ({ data, handleSelect }) => {
         {data &&
           Object.keys(data).map((key, ind) => {
             return (
-              <div className="lg:w-1/3 md:w-1/2 p-4 w-full" key={data[key].id}>
+              <div className="lg:w-1/3 md:w-1/2 p-1 w-full" key={data[key].id} >
                 <MenuItem data={data[key]} handleSelect={handleSelect} />
               </div>
             )

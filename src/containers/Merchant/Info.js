@@ -1,5 +1,0 @@
-// import { MdAccessTime, MdLocationOn } from "react-icons/md"
-// import { FaFacebook } from "react-icons/fa"
-// import { IoIosCall } from "react-icons/io"
-// import { FiPhoneOutgoing } from "react-icons/fi"
-// import ClipLoader from "react-spinners/ClipLoader"

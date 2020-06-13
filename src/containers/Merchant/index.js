@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
-import AboutDropdown from './AboutDropdown'
+import About from './About'
 import MenuList from '../../components/MerchantList/MenuList'
-import ShopCover from './ShopCover'
+import Cover from './Cover'
 import { useMerchant, useCart } from '../../contexts'
 import { SideBarCart } from '../SideBar'
 import { MenuModal } from '../../components/Modal'
+import { AiFillDingtalkCircle } from 'react-icons/ai'
 
-const Merchant = () => {
+const Merchant = ({ openCart }) => {
+
   const { id } = useParams()
   const {
     menus,
@@ -19,7 +21,7 @@ const Merchant = () => {
     fetchMerchantMenuById,
   } = useMerchant()
 
-  const { addItem, order } = useCart()
+  const { addItem, order, removeItem } = useCart()
 
   const [openModal, setOpenModal] = useState(false)
   const [selectedMenu, setSelectedMenu] = useState()
@@ -42,6 +44,10 @@ const Merchant = () => {
     addItem(id, itemId, parseInt(amount))
   }
 
+  const handleRemoveItem = (itemId, amount) => {
+    addItem(id, itemId, parseInt(amount))
+  }
+
   const handleClose = () => {
     setOpenModal(false)
   }
@@ -51,6 +57,12 @@ const Merchant = () => {
   }
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
+      {merchant &&
+        <div className="">
+          <Cover merchant={merchant} />
+          <About merchant={merchant} />
+        </div>
+      }
       <MenuModal
         open={openModal}
         handleClose={handleClose}
@@ -66,6 +78,8 @@ const Merchant = () => {
           loading={loading}
           order={order}
           menu={menu}
+          openCart={openCart}
+          handleRemoveItem={handleRemoveItem}
         />
       </div>
     </div>

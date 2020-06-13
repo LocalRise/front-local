@@ -1,18 +1,21 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { withRouter } from 'react-router-dom'
 import { signOut } from '../../services/firebase'
 
-const CartButton = ({ history, render, setCollapse }) => {
+
+const CartButton = ({ history, render, setCollapse, setOpenCart, openCart }) => {
+  // const [openCart, setOpenCart] = useState(false)
   return (
     <div
       onClick={() => {
-        setCollapse((prev) => !prev)
+        // setCollapse((prev) => !prev)
+        setOpenCart(!openCart ? true : false)
       }}
     >
       {render ? (
         render()
       ) : (
-        <a className="inline-block cursor-pointer text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal-500 hover:bg-white mt-4 lg:mt-0">
+        <a className="inline-block cursor-pointer text-sm px-4 py-2 leading-none border rounded text-orange-500 border-orange-500 hover:border-transparent hover:text-teal-500 hover:font-bold mt-4 lg:mt-0">
           Cart
         </a>
       )}
