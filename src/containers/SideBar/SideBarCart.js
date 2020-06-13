@@ -4,16 +4,16 @@ import styled from 'styled-components'
 import Loader from '../../components/Loader'
 import { Link } from 'react-router-dom'
 
-const Container = ({ children }) => {
+const Container = ({ children, openCart }) => {
   return (
-    <div className="fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5 shadow-lg">
+    <div className={`${openCart ? "" : "hidden"} z-40 fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5 shadow-lg`}>
       <div class="h-full scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:top-16 bg-white lg:bg-transparent">
         {children}
       </div>
     </div>
   )
 }
-const SideBarCart = ({ merchantId, loading, order, menu }) => {
+const SideBarCart = ({ merchantId, loading, order, menu, openCart }) => {
   const [totalPrice, setTotalPrice] = useState(0)
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const SideBarCart = ({ merchantId, loading, order, menu }) => {
 
   if (loading)
     return (
-      <Container>
+      <Container openCart={openCart}>
         <div className="flex h-screen items-center">
           <Loader />
         </div>
@@ -38,7 +38,7 @@ const SideBarCart = ({ merchantId, loading, order, menu }) => {
     )
 
   return (
-    <Container>
+    <Container openCart={openCart}>
       <div class="flex flex-col p-5">
         <p class="mb-2">รายการสั่งซื้อ</p>
         {order &&

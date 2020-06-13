@@ -8,7 +8,8 @@ import { useMerchant, useCart } from '../../contexts'
 import { SideBarCart } from '../SideBar'
 import { MenuModal } from '../../components/Modal'
 
-const Merchant = () => {
+const Merchant = ({openCart}) => {
+  console.log("this",this,openCart)
   const { id } = useParams()
   const {
     menus,
@@ -67,12 +68,13 @@ const Merchant = () => {
         <div className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
           <MenuList data={menu} handleSelect={handleSelect} />
         </div>
-        {/* <SideBarCart
+        <SideBarCart
           merchantId={id}
           loading={loading}
           order={order}
           menu={menu}
-        /> */}
+          openCart={openCart}
+        />
       </div>
     </div>
   )

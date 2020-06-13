@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom'
 import CartButton from './CartButton'
 import LogoText from './../logo_text'
 
-const Navbar = ({ setCollapse }) => {
+const Navbar = ({ setCollapse, setOpenCart, openCart }) => {
   const { user } = useAuth()
 
   return (
@@ -28,7 +28,7 @@ const Navbar = ({ setCollapse }) => {
             <SignInButton />
           </div>
           <div>
-            <CartButton setCollapse={setCollapse} />
+            <CartButton setCollapse={setCollapse} setOpenCart={setOpenCart} openCart={openCart} />
           </div>
         </div>
       )}

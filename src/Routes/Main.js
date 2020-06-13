@@ -8,12 +8,14 @@ import styled from 'styled-components'
 import Checkout from '../containers/Checkout'
 
 const Main = () => {
+  const [openCart, setOpenCart] = useState(false)
   return (
     <Router>
-      <Navbar />
+      <Navbar setOpenCart={setOpenCart} openCart={openCart}/>
       <div className="pt-16">
         <Switch>
-          <Route exact path="/merchant/:id/" component={Merchant} />
+          <Route exact path="/merchant/:id/" render={(props) => <Merchant openCart={openCart}/>} />
+          {/* <Route exact path="/merchant/:id/" component={Merchant} /> */}
           <Route exact path="/checkout/:id/" component={Checkout} />
           <Route exact path="/signin" exact component={SignInContainer} />
           <Route exact path="/signup" exact component={SignUpContainer} />
