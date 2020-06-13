@@ -3,6 +3,7 @@ import React from 'react'
 import SignInForm from '../../components/AuthForm/SignInForm'
 
 import { signInWithEmail, signInWithFacebook } from '../../services/firebase'
+import withRedirectHOC from './withRedirectHOC'
 
 const SignInContainer = () => {
   return (
@@ -15,4 +16,4 @@ const SignInContainer = () => {
   )
 }
 
-export default SignInContainer
+export default withRedirectHOC(SignInContainer)
