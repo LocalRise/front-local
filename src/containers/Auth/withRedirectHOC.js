@@ -3,8 +3,7 @@ import { useAuth } from '../../contexts'
 import { Redirect } from 'react-router-dom'
 const withRedirectHOC = (WrappedComponent) => (props) => {
   const { user } = useAuth()
-  const { post } = props?.location?.state
-  console.log(post)
+  const post = props?.location?.state?.post
 
   if (user) {
     return <Redirect to={post || '/'} />
