@@ -41,7 +41,6 @@ const CheckoutList = ({ location, customerLocation }) => {
     Object.keys(order).map((menuId) => {
       if (!menu[menuId] || !order[menuId]) return
       const price = menu[menuId].menuPrice * order[menuId]
-      // console.log(price, menu[menuId])
       total += price
     })
     setTotalPrice(total)
