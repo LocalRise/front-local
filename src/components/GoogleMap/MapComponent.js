@@ -24,6 +24,9 @@ const MapComponent = compose(
     }),
     lifecycle({
         componentWillMount() {
+            if(this.props.posit){
+                this.props.setCustomerLocation(this.props.posit)
+            }
             const refs = {};
             this.setState({
                 position: null,
@@ -36,8 +39,7 @@ const MapComponent = compose(
                     let strPst = position.toString()
                     strPst = strPst.substr(1, strPst.length - 2);
                     const arrPst = strPst.split(",").map(val => parseFloat(val));
-                    console.log(arrPst)
-                    // this.props.serviceDistance({lat:arrPst[0], lng:arrPst[1]},defaultLampange)
+                    this.props.setCustomerLocation({ lat: arrPst[0], lng: arrPst[1] })
                 }
             });
         }

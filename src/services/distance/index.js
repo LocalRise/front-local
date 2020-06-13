@@ -15,10 +15,6 @@ class GetDistance extends Component {
     }
 
     componentDidMount() {
-        console.log("eiei", this.props.test)
-        this.props.test("5555")
-        console.log("ei 2", this.props.test)
-
     }
 
     render() {
@@ -32,14 +28,17 @@ class GetDistance extends Component {
                     travelMode: "DRIVING"
                 },
                 (response, status) => {
-                    var dst = response.rows[0].elements[0].distance.value
-                    console.log("response", dst);
-                    console.log("status", status);
+                    if (response) {
+                        var dst = response.rows[0].elements[0].distance.value
+                        this.props.setDistance(dst)
+                        console.log(dst)
+                    }
                 }
             )
         }
-        serviceDistance(defaultCenter, defaultLampange);
-        return <div>Hlloe in distance</div>
+        // console.log(this.props)
+        serviceDistance(this.props.merchantLocation ,this.props.customerLocation);
+        return <div>Hello in distance</div>
     }
 }
 
