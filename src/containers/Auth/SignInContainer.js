@@ -6,13 +6,20 @@ import { signInWithEmail, signInWithFacebook } from '../../services/firebase'
 import withRedirectHOC from './withRedirectHOC'
 
 const SignInContainer = () => {
-  const handleSignIn = (data) => {
+  const [error, setError] = useState()
+  const handleSignIn = async (data) => {
     const { email, password } = data
-    signInWithEmail({ email, password })
+    setError(null)
+    try {
+      await signInWithEmail({ email, password })
+    } catch (e) {
+      setError(e)
+    }
   }
   return (
     <div>
       <SignInForm
+        error={error}
         handleSignIn={handleSignIn}
         handleFacebookSignIn={signInWithFacebook}
       />

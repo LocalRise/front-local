@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const SignUpForm = ({ handleSignUp }) => {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   return (
@@ -17,7 +17,7 @@ const SignUpForm = ({ handleSignUp }) => {
           className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           id="email"
           type="email"
-          onChange={(e) => setUsername(e.target.value)}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Username"
         />
       </div>
@@ -40,7 +40,7 @@ const SignUpForm = ({ handleSignUp }) => {
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           type="button"
           onClick={() => {
-            handleSignUp({ username, password })
+            handleSignUp({ email, password })
           }}
         >
           Sign Up

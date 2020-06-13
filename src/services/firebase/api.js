@@ -5,11 +5,7 @@ export async function signInWithEmail({ email, password }) {
 }
 
 export async function signUpWithEmail({ email, password }) {
-  console.log(email, password)
-  const user = await firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-  console.log(user.user.uid)
+  return firebase.auth().createUserWithEmailAndPassword(email, password)
 }
 
 export async function signInWithFacebook() {
