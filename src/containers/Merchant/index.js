@@ -52,7 +52,7 @@ const Merchant = () => {
   return (
     <div class="w-full max-w-screen-xl mx-auto px-6">
       {merchant &&
-        <div className="-ml-6">
+        <div className="">
           <Cover merchant={merchant} />
           <About merchant={merchant} />
         </div>
@@ -67,12 +67,12 @@ const Merchant = () => {
         <div className="min-h-screen w-full lg:static lg:max-h-full lg:overflow-visible lg:w-3/4 xl:w-4/5">
           <MenuList data={menu} handleSelect={handleSelect} />
         </div>
-        <SideBarCart
+        {/* <SideBarCart
           merchantId={id}
           loading={loading}
           order={order}
           menu={menu}
-        />
+        /> */}
       </div>
     </div>
   )

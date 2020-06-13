@@ -26,11 +26,11 @@ const About = ({ merchant:{description,facebook,foodType,id,image,location,name,
 
   return (
     <>
-      <div className="flex flex-wrap -mb-3">
+      <div className="flex flex-wrap">
         <div className="w-full px-3">
           <div className="relative inline-flex align-middle w-full">
             <AiOutlineInfoCircle
-              className="absolute right-0 -mt-6 text-3xl rounded-full "
+              className="absolute right-0 -mt-3 text-3xl rounded-full "
               style={{ backgroundColor: 'white', transition: 'all .15s ease' }}
               type="button"
               ref={btnDropdownRef}
