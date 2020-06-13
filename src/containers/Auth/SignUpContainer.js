@@ -1,20 +1,19 @@
 import React, { useState } from 'react'
 import SignUpForm from '../../components/AuthForm/SignUpForm'
 
-import { signUpWithEmail } from '../../services/firebase'
+import { signUpWithEmail, saveUserData } from '../../services/firebase'
 import withRedirectHOC from './withRedirectHOC'
 
 const SignUpContainer = () => {
   const [error, setError] = useState()
-  const handleSignUp = async (data) => {
-    const { email, password } = data
+  const handleSignUp = async ({ email, password, ...data }) => {
     setError(null)
     try {
       const res = await signUpWithEmail({ email, password })
       const {
-        user: { id },
+        user: { uid },
       } = res
-      console.log(id)
+      await saveUserData(uid, data)
     } catch (e) {
       setError(e)
     }

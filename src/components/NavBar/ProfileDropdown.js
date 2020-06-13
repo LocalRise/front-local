@@ -35,13 +35,7 @@ const ProfileDropdown = ({ user }) => {
       {toggle && (
         <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-xl">
           <DropdownItem>First</DropdownItem>
-          <DropdownItem>Second</DropdownItem>
-          <DropdownItem>Thrid</DropdownItem>
-          {user && (
-            <SignOutButton
-              render={() => <DropdownItem>Signout</DropdownItem>}
-            />
-          )}
+          <SignOutButton render={() => <DropdownItem>Signout</DropdownItem>} />
         </div>
       )}
       {/* {user ? (

@@ -47,10 +47,10 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
           Sign In
         </button>
       </div>
-      <div class="flex flex-wrap justify-center">
-        <div class="w-full sm:w-1/2 sm:pr-2 mb-3 sm:mb-0">
+      <div className="flex flex-wrap justify-center">
+        <div className="w-full sm:w-1/2 sm:pr-2 mb-3 sm:mb-0">
           <button
-            class="w-full bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
+            className="w-full bg-blue-800 hover:bg-blue-900 text-white font-bold py-2 px-4 focus:outline-none focus:shadow-outline"
             type="button"
             onClick={() => handleFacebookSignIn()}
           >

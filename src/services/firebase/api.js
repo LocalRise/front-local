@@ -1,4 +1,5 @@
 import firebase, { getFacebookProvider } from './firebase'
+import firestore from './firestore'
 
 export async function signInWithEmail({ email, password }) {
   return firebase.auth().signInWithEmailAndPassword(email, password)
@@ -16,6 +17,11 @@ export async function signInWithFacebook() {
   } catch (error) {
     throw error
   }
+}
+
+export async function saveUserData(uid, data) {
+  console.log('save', uid, data)
+  return firestore.collection('customers').doc(uid).set(data)
 }
 
 export async function signOut() {
