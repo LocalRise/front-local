@@ -1,15 +1,12 @@
 import firebase, { getFacebookProvider } from './firebase'
+import firestore from './firestore'
 
-export async function signInWithEmail(email, password) {
+export async function signInWithEmail({ email, password }) {
   return firebase.auth().signInWithEmailAndPassword(email, password)
 }
 
-export async function signUpWithEmail(email, password) {
-  console.log(email, password)
-  const user = await firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-  console.log(user.user.uid)
+export async function signUpWithEmail({ email, password }) {
+  return firebase.auth().createUserWithEmailAndPassword(email, password)
 }
 
 export async function signInWithFacebook() {
@@ -20,6 +17,11 @@ export async function signInWithFacebook() {
   } catch (error) {
     throw error
   }
+}
+
+export async function saveUserData(uid, data) {
+  console.log('save', uid, data)
+  return firestore.collection('customers').doc(uid).set(data)
 }
 
 export async function signOut() {
