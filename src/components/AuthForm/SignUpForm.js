@@ -13,10 +13,10 @@ const SignUpForm = ({ handleSignUp }) => {
     handleSignUp({ email, password, tel, firstname, lastname })
   }
 
-  useEffect(() => {}, [password, confirmPassword]) //handle error
+  useEffect(() => { }, [password, confirmPassword]) //handle error
 
   return (
-    <div className="bg-cover pt-10 pb-10 bg-fixed h-screen bg-center" style={{backgroundImage: `url(${'images/meal-plan-bg-white.jpg'})`}}>
+    <div className="bg-cover pt-10 pb-10 bg-fixed h-screen bg-center" style={{ backgroundImage: `url(${'images/meal-plan-bg-white.jpg'})` }}>
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-lg mx-auto">
         <div class="flex flex-col text-center w-full mb-12 mt-8">
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Sign Up</h1>
@@ -36,6 +36,7 @@ const SignUpForm = ({ handleSignUp }) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Username"
           />
+          {email != "" && (!email.includes('@') || !email.includes('.')) && <div className="text-red-600 text-sm">โปรกรอกอีเมลให้ถูกต้อง (abc@mail.com)</div>}
         </div>
         <div className="mb-6">
           <label
@@ -50,6 +51,7 @@ const SignUpForm = ({ handleSignUp }) => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
+          { password!="" && password.length < 6 && <div className="text-red-600 text-sm">กรุณาตั้งรหัสผ่านมากกว่า 6 ตัวอักษร</div>}
         </div>
         <div className="mb-6">
           <label
@@ -64,6 +66,7 @@ const SignUpForm = ({ handleSignUp }) => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             type="password"
           />
+          { password!=confirmPassword && <div className="text-red-600 text-sm">กรุณากรอกรหัสผ่านให้ตรงกัน</div>}
         </div>
         <div className="mb-4">
           <label
@@ -79,6 +82,7 @@ const SignUpForm = ({ handleSignUp }) => {
             onChange={(e) => setFirstname(e.target.value)}
             placeholder="Firstname"
           />
+          { firstname==""&& email!="" && <div className="text-red-600 text-sm">กรุณากรอกข้อมูลให้ครบถ้วน</div>}
         </div>
         <div className="mb-4">
           <label
@@ -94,6 +98,7 @@ const SignUpForm = ({ handleSignUp }) => {
             onChange={(e) => setLastname(e.target.value)}
             placeholder="lastname"
           />
+          { lastname==""&& firstname!="" && <div className="text-red-600 text-sm">กรุณากรอกข้อมูลให้ครบถ้วน</div>}
         </div>
         <div className="mb-8">
           <label
@@ -109,6 +114,7 @@ const SignUpForm = ({ handleSignUp }) => {
             onChange={(e) => setTel(e.target.value)}
             placeholder="Tel."
           />
+          { tel.length != 10 && lastname!="" && <div className="text-red-600 text-sm">กรุณากรอกเบอร์โทรศัพท์ให้ถูกต้อง (0912345678)</div>}
         </div>
         <div className="flex items-center justify-between">
           <button
