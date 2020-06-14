@@ -9,7 +9,7 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
     <div className="bg-cover pt-10 pb-10 bg-fixed h-screen bg-center" style={{backgroundImage: `url(${'images/meal-plan-bg-white.jpg'})`}}>
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-lg mx-auto">
         <div class="flex flex-col text-center w-full mb-12 mt-10">
-          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Sign In</h1>
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">ลงชื่อเข้าใช้</h1>
           <p class="lg:w-2/3 mx-auto leading-relaxed text-base">เข้าสู่ระบบเพื่อเริ่มการสั่งอาหารได้เลย!</p>
         </div>
         <div className="mb-4">
@@ -49,7 +49,7 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
               handleSignIn({ email, password })
             }}
           >
-            Sign In
+            ลงชื่อเข้าใช้
           </button>
         </div>
         {/* <div className="flex flex-wrap justify-center">

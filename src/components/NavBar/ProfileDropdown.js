@@ -45,7 +45,7 @@ const ProfileDropdown = ({ user }) => {
       {toggle && (
         <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-xl w-48">
           <DropdownItem>{userName}</DropdownItem>
-          <SignOutButton render={() => <DropdownItem>Signout</DropdownItem>} />
+          <SignOutButton render={() => <DropdownItem>ลงชื่อออก</DropdownItem>} />
         </div>
       )}
       {/* {user ? (

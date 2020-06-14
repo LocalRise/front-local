@@ -116,7 +116,7 @@ const SignUpForm = ({ handleSignUp }) => {
             type="button"
             onClick={handleSubmit}
           >
-            Sign Up
+            สมัครสมาชิก
           </button>
         </div>
       </div>
