@@ -62,14 +62,10 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
   const db = firebase.firestore()
 
   const addOrder = async (e) => {
-    var count = 0
     try {
       db.collection('orders').get()
       .then(snap =>{
-        count = snap.size+1
-      })
-      .then(() => {
-        db.collection('orders').doc(count.toString()).set({
+        db.collection('orders').doc('f'+snap.size.toString()).set({
           date: today,
           customerId: user.uid,
           customerName: userInfo.name,
