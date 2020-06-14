@@ -60,9 +60,9 @@ const MenuModal = ({ open, handleClose, data = {}, handleAddItem }) => {
             </ButtonIcon>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-2">
           <ButtonIcon handleClick={handleSubmit} styles={"bg-orange-500 hover:bg-orange-600 px-4"}>
-            <FiShoppingCart className="mx-3" />
+            <FiShoppingCart className="mx-3" /> เพิ่มลงตะกร้า
           </ButtonIcon>
         </div>
       </div>

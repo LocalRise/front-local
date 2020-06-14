@@ -55,7 +55,6 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
     })
     setTotalPrice(total)
     setMenuList(tmpList)
-    console.log(tmpList)
   }, [order, menu])
 
   let d = new Date();
@@ -63,7 +62,7 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
   let today = nd[1] + "/" + nd[0] + "/" + nd[2]
 
   const addOrder = async (e) => {
-    // e.preventDefault()
+
     const db = firebase.firestore()
     try {
       await db.collection('orders').add({
@@ -81,10 +80,10 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
         serviceChargeDistance: serviceChargeDistance,
         menuList: menuList,
       })
-      
       alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
     } catch (e) {
-      alert('คุณคือผู้โชคดี แคปหน้านี้ไว้ และติดต่อ @Fresh2Home เพื่อรับการส่งฟรี \nรหัสโค้ดคือ',e)
+      e.preventDefault()
+      alert('อาหารของคุณยังไม่ถูกสั่ง แคปหน้านี้ไว้ และติดต่อ @Fresh2Home เพื่อรับการส่งฟรี \nรหัสโค้ดคือ', e)
     }
   }
 
@@ -213,7 +212,7 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
       {distance != 0 ?
         (
           <NavLink
-            to={`/payment/${totalPrice + serviceChargeDistance}/${userInfo.name+"_"+merchantName}`}
+            to={`/payment/${totalPrice + serviceChargeDistance}/${userInfo.name + "_" + merchantName}`}
             onClick={addOrder}>
             <button className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg">
               สั่งอาหาร
