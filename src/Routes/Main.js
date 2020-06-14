@@ -21,7 +21,7 @@ const Main = () => {
             render={(props) => <Merchant openCart={openCart} />}
           />
           <PrivateRoute exact path="/checkout/:id/" component={Checkout} />
-          <Route exact path="/payment/:cost/" component={Payment} />
+          <PrivateRoute exact path="/payment/:cost/:identity" component={Payment} />
           <Route exact path="/signin" exact component={SignInContainer} />
           <Route exact path="/signup" exact component={SignUpContainer} />
           <Route exact path="/" component={AppHome} />

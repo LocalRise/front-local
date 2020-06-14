@@ -5,6 +5,7 @@ import qrcode from 'qrcode'
 import generatePayload from 'promptpay-qr'
 import styled from "styled-components"
 import { FaLine } from 'react-icons/fa'
+import PicPromtPay from './promt-pay.jpg'
 
 const Button = styled.button`
   background-color: rgba(0,185,1,0.9);
@@ -19,7 +20,7 @@ const Button = styled.button`
 `
 
 const Payment = () => {
-    const { cost } = useParams()
+    const { cost, identity } = useParams()
 
     const mobileNumber = '091-078-5410' //OHM Phone
     const amount = parseInt(cost)
@@ -39,14 +40,19 @@ const Payment = () => {
         ))
     return (
         <>
-            <section class="text-gray-700 body-font text-center" style={{ height: '80vh' }}>
-                <div class="container flex flex-col px-6 py-10 mx-auto">
-                    <p className="mx-auto font-bold leading-relaxed text-3xl text-left mb-10 text-center mt-10 text-gray-700 ">
-                        ชำระเงินด้วย QR CODE</p>
-                    <p className="text-2xl">จำนวนเงินที่ต้องชำระ {cost} บาท</p>
-                    <div className="mx-auto my-5" dangerouslySetInnerHTML={{ __html: QrCode }} />
-                    <p className="text-2xl" >เมื่อชำระเงินเสร็จแล้วสามารถแจ้งการชำระเงินได้ที่</p>
-                    <a className="mt-10" href='https://lin.ee/rPvI7OR' target="_blank">
+            <section class="text-gray-700 body-font text-center mb-10" style={{ minHeight: '80vh' }}>
+                <div class="container flex flex-col px-6 py-5 mx-auto">
+                    <p className="mx-auto font-bold leading-relaxed text-2xl text-left mb-5 text-center text-gray-700 ">
+                        <p>ชำระเงินค่าอาหารและ</p>
+                        <p>ค่าบริการด้วย QRCODE</p></p>
+                    <p className="text-xl">จำนวนเงินที่ต้องชำระ {cost} บาท</p>
+                    <img src={PicPromtPay} className="h-12 mx-auto mt-3"/>
+                    <div className="mx-auto " dangerouslySetInnerHTML={{ __html: QrCode }} />
+                    <p className="text-lg -mt-3 mb-2">นายปณัย เกตุแก้ว 0910785410</p>
+                    <p className="text-sm font-bold mb-5">{identity}</p>
+                    <p className="text-xl" >เมื่อชำระเงินเสร็จแล้ว กรุณาแคปหน้านี้</p>
+                    <p className="text-xl">เพื่อแจ้งการชำระเงินได้ที่</p>
+                    <a className="mt-1" href='https://lin.ee/rPvI7OR' target="_blank">
                         <Button className="p-2">
                             <span className="flex">
                                 <FaLine className="text-2xl mr-3" style={{ color: 'rgba(255,255,255)' }} />

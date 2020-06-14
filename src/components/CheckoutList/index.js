@@ -6,7 +6,7 @@ import Distance from './../../services/distance'
 import { NavLink } from 'react-router-dom'
 
 
-const CheckoutList = ({ location, customerLocation }) => {
+const CheckoutList = ({ location, customerLocation, userInfo }) => {
   const { id } = useParams()
   const {
     menus,
@@ -20,7 +20,6 @@ const CheckoutList = ({ location, customerLocation }) => {
 
   const { addItem, order } = useCart()
   const { user } = useAuth()
-  console.log("user", user)
 
   const merchant = merchants[id]
   const menu = menus[id]
@@ -66,21 +65,27 @@ const CheckoutList = ({ location, customerLocation }) => {
   const addOrder = async (e) => {
     // e.preventDefault()
     const db = firebase.firestore()
-    await db.collection('orders').add({
-      date: today,
-      customerId: user.uid,
-      merchantId: id,
-      orderList: order,
-      totalPrice: totalPrice,
-      customerLocation: customerLocation,
-      distance: distance,
-      restaurantLoaction: merchantLinkLocation,
-      restaurantName: merchantName,
-      serviceChargeDistance: serviceChargeDistance,
-      menuList: menuList,
-    })
-
-    alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
+    try {
+      await db.collection('orders').add({
+        date: today,
+        customerId: user.uid,
+        customerName: userInfo.name,
+        customerTel: userInfo.tel,
+        merchantId: id,
+        orderList: order,
+        totalPrice: totalPrice,
+        customerLocation: customerLocation,
+        distance: distance,
+        restaurantLoaction: merchantLinkLocation,
+        restaurantName: merchantName,
+        serviceChargeDistance: serviceChargeDistance,
+        menuList: menuList,
+      })
+      
+      alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
+    } catch (e) {
+      alert('คุณคือผู้โชคดี แคปหน้านี้ไว้ และติดต่อ @Fresh2Home เพื่อรับการส่งฟรี \nรหัสโค้ดคือ',e)
+    }
   }
 
   return (
@@ -208,7 +213,7 @@ const CheckoutList = ({ location, customerLocation }) => {
       {distance != 0 ?
         (
           <NavLink
-            to={`/payment/${totalPrice + serviceChargeDistance}/`}
+            to={`/payment/${totalPrice + serviceChargeDistance}/${userInfo.name+"_"+merchantName}`}
             onClick={addOrder}>
             <button className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg">
               สั่งอาหาร

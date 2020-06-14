@@ -11,7 +11,7 @@ const Navbar = ({ setCollapse, setOpenCart, openCart }) => {
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-white p-3 fixed w-full z-50 h-16">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+      <div className="flex items-center flex-shrink-0 text-white mr-6 w-1">
         <NavLink to="/">
           <LogoText />
         </NavLink>
