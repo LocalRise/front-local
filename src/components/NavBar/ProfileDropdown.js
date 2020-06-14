@@ -15,7 +15,14 @@ const ProfileDropdown = ({ user }) => {
   const [toggle, setToggle] = useState(false)
   const db = firebase.firestore()
   let [userName, setUserName] = useState('')
-  db.collection("customers").doc(user.uid).get().then(doc => { setUserName(doc.data().firstname + " " + doc.data().lastname) })
+  if (user.uid) {
+    db.collection("customers")
+      .doc(user.uid)
+      .get()
+      .then(async doc => { setUserName(doc.data().firstname + " " + doc.data().lastname) })
+  } else {
+    setUserName("UserName")
+  }
   return (
     <div className="relative w-10 h-10">
       <div

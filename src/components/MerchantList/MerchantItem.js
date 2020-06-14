@@ -2,8 +2,8 @@ import React from 'react'
 
 const MerchantItem = ({ data: { id, image, tel, name } }) => {
   return (
-    <div>
-      <div className="block relative h-48 rounded overflow-hidden">
+    <div className="bg-gray-200 rounded-lg overflow-hidden">
+      <div className="block relative h-48 rounded-md overflow-hidden">
         <img
           alt={name + ' image'}
           className="object-cover object-center w-full h-full block"
@@ -11,7 +11,7 @@ const MerchantItem = ({ data: { id, image, tel, name } }) => {
           loading="lazy"
         />
       </div>
-      <div className="mt-4">
+      <div className="p-3">
         <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
           {/* CATEGORY */}
         </h3>

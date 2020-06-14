@@ -21,7 +21,7 @@ const Button = styled.button`
 const Payment = () => {
     const { cost } = useParams()
 
-    const mobileNumber = '091-078-5410'
+    const mobileNumber = '091-078-5410' //OHM Phone
     const amount = parseInt(cost)
     const payload = generatePayload(mobileNumber, { amount })
 
