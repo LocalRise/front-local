@@ -18,10 +18,6 @@ const Button = styled.button`
   border-radius: 10px;
 `
 
-const QRCODE = ({ QrCode }) => {
-    return <div>{QrCode}</div>
-}
-
 const Payment = () => {
     const { cost } = useParams()
 
