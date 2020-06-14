@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useMerchant, useCart, useAuth  } from '../../contexts'
+import { useMerchant, useCart, useAuth } from '../../contexts'
 import { useParams } from 'react-router-dom'
 import firebase from '../../services/firebase'
 import Distance from './../../services/distance'
@@ -20,6 +20,7 @@ const CheckoutList = ({ location, customerLocation }) => {
 
   const { addItem, order } = useCart()
   const { user } = useAuth()
+  console.log("user", user)
 
   const merchant = merchants[id]
   const menu = menus[id]
@@ -31,45 +32,52 @@ const CheckoutList = ({ location, customerLocation }) => {
   const [distToFixed1, setDistToFixed1] = useState(0)
   // const [serviceChargeCarry, setServiceChargeCarry] = useState(0)
   // * use with gg sheet
+  const [menuList, setMenuList] = useState([])
   const merchantLinkLocation = merchant && merchant.linkLocation
   const merchantName = merchant && merchant.name
-  
 
   useEffect(() => {
     // fetchMerchantById(id)
-    console.log('++++',user)
+    // console.log('++++', user)
     fetchMerchantList()
     if (!menu) fetchMerchantMenuById(id)
 
     if (!menu || !menu) return
 
     let total = 0
+    let tmpList = []
     Object.keys(order).map((menuId) => {
       if (!menu[menuId] || !order[menuId]) return
-      const price = menu[menuId].menuPrice * order[menuId]
+      const { menuName, menuPrice } = menu[menuId]
+      const amount = order[menuId]
+      const price = menuPrice * amount
       total += price
+      tmpList.push({ set: [menuName, menuPrice, amount, menuPrice * amount] })
     })
     setTotalPrice(total)
+    setMenuList(tmpList)
+    console.log(tmpList)
   }, [order, menu])
 
   let d = new Date();
   let nd = d.toLocaleDateString().split("/");
   let today = nd[1] + "/" + nd[0] + "/" + nd[2]
 
-  const addOrder = (e) => {
+  const addOrder = async (e) => {
     // e.preventDefault()
     const db = firebase.firestore()
-    const orderRef = db.collection('orders').add({
-      Date: today,
-      customerId: 5,
+    await db.collection('orders').add({
+      date: today,
+      customerId: user.uid,
       merchantId: id,
       orderList: order,
       totalPrice: totalPrice,
       customerLocation: customerLocation,
+      distance: distance,
       restaurantLoaction: merchantLinkLocation,
       restaurantName: merchantName,
-      distance: distance,
       serviceChargeDistance: serviceChargeDistance,
+      menuList: menuList,
     })
 
     alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
@@ -136,6 +144,7 @@ const CheckoutList = ({ location, customerLocation }) => {
                     if (!menu[menuId] || !order[menuId]) return
                     const { menuName, menuPrice } = menu[menuId]
                     const amount = order[menuId]
+
                     return (
                       <div key={menuId}>
                         <div className="flex border-b border-gray-300 py-2 ">
@@ -198,11 +207,10 @@ const CheckoutList = ({ location, customerLocation }) => {
       </div>
       {distance != 0 ?
         (
-          <NavLink to={`/payment/${totalPrice + serviceChargeDistance}/`}>
-            <button
-              onClick={addOrder}
-              className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
-            >
+          <NavLink
+            to={`/payment/${totalPrice + serviceChargeDistance}/`}
+            onClick={addOrder}>
+            <button className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg">
               สั่งอาหาร
           </button>
           </NavLink>
