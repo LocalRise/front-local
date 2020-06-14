@@ -25,7 +25,7 @@ const Payment = () => {
     const [orderId, setOrderId] = useState("OrderID")
     const db = firebase.firestore()
     db.collection('orders').get()
-        .then(snap => { setOrderId('f' + (snap.size).toString()) })
+        .then(snap => { setOrderId('F' + (snap.size).toString()) })
     const { cost, identity } = useParams()
 
     const mobileNumber = '091-078-5410' //OHM Phone
