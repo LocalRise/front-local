@@ -6,6 +6,8 @@ import generatePayload from 'promptpay-qr'
 import styled from "styled-components"
 import { FaLine } from 'react-icons/fa'
 import PicPromtPay from './promt-pay.jpg'
+import firebase from './../../services/firebase'
+
 
 const Button = styled.button`
   background-color: rgba(0,185,1,0.9);
@@ -20,6 +22,10 @@ const Button = styled.button`
 `
 
 const Payment = () => {
+    const [orderId, setOrderId] = useState("OrderID")
+    const db = firebase.firestore()
+    db.collection('orders').get()
+        .then(snap => { setOrderId('f' + (snap.size).toString()) })
     const { cost, identity } = useParams()
 
     const mobileNumber = '091-078-5410' //OHM Phone
@@ -46,10 +52,10 @@ const Payment = () => {
                         <p>ชำระเงินค่าอาหารและ</p>
                         <p>ค่าบริการด้วย QRCODE</p></p>
                     <p className="text-xl">จำนวนเงินที่ต้องชำระ {cost} บาท</p>
-                    <img src={PicPromtPay} className="h-12 mx-auto mt-3"/>
+                    <img src={PicPromtPay} className="h-12 mx-auto mt-3" />
                     <div className="mx-auto " dangerouslySetInnerHTML={{ __html: QrCode }} />
                     <p className="text-lg -mt-3 mb-2">นายปณัย เกตุแก้ว 0910785410</p>
-                    <p className="text-sm font-bold mb-5">{identity}</p>
+                    <p className="text-sm font-bold mb-5">{orderId} {identity}</p>
                     <p className="text-xl" >เมื่อชำระเงินเสร็จแล้ว กรุณาแคปหน้านี้</p>
                     <p className="text-xl">เพื่อแจ้งการชำระเงินได้ที่</p>
                     <a className="mt-1" href='https://lin.ee/rPvI7OR' target="_blank">

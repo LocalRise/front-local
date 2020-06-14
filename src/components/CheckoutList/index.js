@@ -65,7 +65,7 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
     try {
       db.collection('orders').get()
       .then(snap =>{
-        db.collection('orders').doc('f'+snap.size.toString()).set({
+        db.collection('orders').doc('f'+(snap.size+1).toString()).set({
           date: today,
           customerId: user.uid,
           customerName: userInfo.name,
