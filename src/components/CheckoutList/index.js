@@ -36,8 +36,6 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
   const merchantName = merchant && merchant.name
 
   useEffect(() => {
-    // fetchMerchantById(id)
-    // console.log('++++', user)
     fetchMerchantList()
     if (!menu) fetchMerchantMenuById(id)
 
@@ -62,31 +60,39 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
   let nd = d.toLocaleDateString().split("/");
   let today = nd[1] + "/" + nd[0] + "/" + nd[2]
 
+  const db = firebase.firestore()
+
   const addOrder = async (e) => {
-    // e.preventDefault()
-    const db = firebase.firestore()
+    var count = 0
     try {
-      await db.collection('orders').add({
-        date: today,
-        customerId: user.uid,
-        customerName: userInfo.name,
-        customerTel: userInfo.tel,
-        merchantId: id,
-        orderList: order,
-        totalPrice: totalPrice,
-        customerLocation: customerLocation,
-        distance: distance,
-        restaurantLoaction: merchantLinkLocation,
-        restaurantName: merchantName,
-        serviceChargeDistance: serviceChargeDistance,
-        menuList: menuList,
+      db.collection('orders').get()
+      .then(snap =>{
+        count = snap.size+1
       })
-      
-      alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
-    } catch (e) {
+      .then(() => {
+        db.collection('orders').doc(count.toString()).set({
+          date: today,
+          customerId: user.uid,
+          customerName: userInfo.name,
+          customerTel: userInfo.tel,
+          merchantId: id,
+          orderList: order,
+          totalPrice: totalPrice,
+          customerLocation: customerLocation,
+          distance: distance,
+          restaurantLoaction: merchantLinkLocation,
+          restaurantName: merchantName,
+          serviceChargeDistance: serviceChargeDistance,
+          menuList: menuList,
+        })
+        alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
+      });
+    } catch(e){
       alert('คุณคือผู้โชคดี แคปหน้านี้ไว้ และติดต่อ @Fresh2Home เพื่อรับการส่งฟรี \nรหัสโค้ดคือ',e)
     }
+    
   }
+  
 
   return (
     <section className="body-font overflow-hidden">
