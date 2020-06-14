@@ -53,7 +53,6 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
     })
     setTotalPrice(total)
     setMenuList(tmpList)
-    console.log(tmpList)
   }, [order, menu])
 
   let d = new Date();
@@ -219,7 +218,7 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
       {distance != 0 ?
         (
           <NavLink
-            to={`/payment/${totalPrice + serviceChargeDistance}/${userInfo.name+"_"+merchantName}`}
+            to={`/payment/${totalPrice + serviceChargeDistance}/${userInfo.name + "_" + merchantName}`}
             onClick={addOrder}>
             <button className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg">
               สั่งอาหาร

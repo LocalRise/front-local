@@ -6,7 +6,7 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
   const [password, setPassword] = useState('')
 
   return (
-    <div className="bg-cover pt-10 pb-10 bg-fixed h-screen bg-center" style={{backgroundImage: `url(${'images/meal-plan-bg-white.jpg'})`}}>
+    <div className="bg-cover pt-10 pb-10 bg-fixed h-screen bg-center" style={{ backgroundImage: `url(${'images/meal-plan-bg-white.jpg'})` }}>
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-lg mx-auto">
         <div class="flex flex-col text-center w-full mb-12 mt-10">
           <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">ลงชื่อเข้าใช้</h1>
@@ -26,6 +26,7 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
+          { email!="" && (!email.includes('@') || !email.includes('.')) && <div className="text-red-600 text-sm">โปรกรอกอีเมลให้ถูกต้อง (abc@mail.com)</div>}
         </div>
         <div className="mb-8">
           <label
@@ -40,6 +41,7 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
+          { password ==="" && email!="" && <div className="text-red-600 text-sm">โปรกรอกรหัสผ่าน</div>}
         </div>
         <div className="flex items-center justify-between mb-3">
           <button
