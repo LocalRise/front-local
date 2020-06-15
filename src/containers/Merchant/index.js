@@ -61,7 +61,6 @@ const Merchant = ({ openCart }) => {
     <div class="w-full max-w-screen-xl mx-auto px-6">
       {merchant &&
         <div className="">
-          {console.log("merchants",merchant)}
           <Cover merchant={merchant} />
           <About merchant={merchant} />
         </div>

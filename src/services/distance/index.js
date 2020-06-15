@@ -40,7 +40,7 @@ class GetDistance extends Component {
                                 // this.props.setServiceChargeDistance(parseInt((15 + (Math.ceil(dist) - 5) * 5).toFixed(0)))
                                 this.props.setServiceChargeDistance(parseInt((Math.ceil(dist) - 5) * 5))
                             } else {
-                                this.props.setServiceChargeDistance(parseInt(15))
+                                this.props.setServiceChargeDistance(parseInt(0))
                             }
 
                             // console.log(dst/1000)
