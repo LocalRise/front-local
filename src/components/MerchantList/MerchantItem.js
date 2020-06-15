@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MerchantItem = ({ data: { id, image, tel, name, openingDay } }) => {
+const MerchantItem = ({ data: { id, image, tel, name, openingDay, openingTime } }) => {
   const today = Date().toString().substring(0, 3).toLowerCase()
 
   return (
@@ -17,6 +17,10 @@ const MerchantItem = ({ data: { id, image, tel, name, openingDay } }) => {
         <div className={`absolute right-0 top-0 -mt-4 rounded-full pt-1 px-2 ${openingDay.toLowerCase().split(" ").includes(today) ? "bg-teal-600" : "bg-orange-600"}`}>
           <p className="text-white font-bold">{openingDay.toLowerCase().split(" ").includes(today) ? "วันนี้ร้านเปิด" : "วันนี้ร้านปิด"}</p>
         </div>
+        {openingDay.toLowerCase().split(" ").includes(today) &&
+          <div className="absolute right-0 -mt-1 text-sm pr-1 rounded-full bg-white px-1">
+            <p className="">{openingTime[0] === "0" ? openingTime.substring(1,) : openingTime}</p>
+          </div>}
         {/* <h3 className="text-gray-500 text-xs tracking-widest title-font mb-1">
           CATEGORY
         </h3> */}
