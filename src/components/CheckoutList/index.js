@@ -3,7 +3,7 @@ import { useMerchant, useCart, useAuth } from '../../contexts'
 import { useParams } from 'react-router-dom'
 import firebase from '../../services/firebase'
 import Distance from './../../services/distance'
-import { NavLink } from 'react-router-dom'
+import { VerifySubmitModal } from './../Modal'
 
 
 const CheckoutList = ({ location, customerLocation, userInfo }) => {
@@ -21,6 +21,15 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
   const { addItem, order } = useCart()
   const { user } = useAuth()
 
+  const [openModal, setOpenModal] = useState(false)
+  const handleClose = () => {
+    setOpenModal(false)
+  }
+
+  function refreshPage() {
+    window.location.reload(false);
+  }
+
   const merchant = merchants[id]
   const menu = menus[id]
   const [totalPrice, setTotalPrice] = useState(0)
@@ -29,6 +38,7 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
   const [distance, setDistance] = useState(0)
   const [serviceChargeDistance, setServiceChargeDistance] = useState(0)
   const [distToFixed1, setDistToFixed1] = useState(0)
+  const [note, setNote] = useState("")
   // const [serviceChargeCarry, setServiceChargeCarry] = useState(0)
   // * use with gg sheet
   const [menuList, setMenuList] = useState([])
@@ -64,33 +74,41 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
   const addOrder = async (e) => {
     try {
       db.collection('orders').get()
-      .then(snap =>{
-        db.collection('orders').doc('F'+(snap.size+1).toString()).set({
-          date: today,
-          customerId: user.uid,
-          customerName: userInfo.name,
-          customerTel: userInfo.tel,
-          merchantId: id,
-          orderList: order,
-          totalPrice: totalPrice,
-          customerLocation: customerLocation,
-          distance: distance,
-          restaurantLoaction: merchantLinkLocation,
-          restaurantName: merchantName,
-          serviceChargeDistance: serviceChargeDistance,
-          menuList: menuList,
-        })
-        alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
-      });
-    } catch(e){
-      alert('คุณคือผู้โชคดี แคปหน้านี้ไว้ และติดต่อ @Fresh2Home เพื่อรับการส่งฟรี \nรหัสโค้ดคือ',e)
+        .then(snap => {
+          db.collection('orders').doc('F' + (snap.size + 1).toString()).set({
+            date: today,
+            customerId: user.uid,
+            customerName: userInfo.name,
+            customerTel: userInfo.tel,
+            merchantId: id,
+            orderList: order,
+            totalPrice: totalPrice,
+            customerLocation: customerLocation,
+            distance: distance,
+            restaurantLoaction: merchantLinkLocation,
+            restaurantName: merchantName,
+            serviceChargeDistance: serviceChargeDistance,
+            menuList: menuList,
+            note: note,
+          })
+          alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
+        });
+    } catch (e) {
+      alert('คุณคือผู้โชคดี แคปหน้านี้ไว้ และติดต่อ @Fresh2Home เพื่อรับการส่งฟรี \nรหัสโค้ดคือ', e)
     }
-    
+
   }
-  
+
 
   return (
     <section className="body-font overflow-hidden">
+      <VerifySubmitModal
+        open={openModal}
+        handleClose={handleClose}
+        addOrder={addOrder}
+        cost={totalPrice + serviceChargeDistance}
+        cusName_merName={userInfo.name + "_" + merchantName}
+      />
       <div className="hidden">
         {merchant &&
           merchant.location &&
@@ -135,7 +153,7 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
               </a>
             </div>
           </div>
-          <div className="py-8 flex border-t-2 border-gray-200 flex-wrap md:flex-no-wrap">
+          <div className="pt-8 flex border-t-2 border-gray-200 flex-wrap md:flex-no-wrap">
             <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
               <span className="tracking-widest font-medium title-font text-gray-900 text-2xl">
                 รายการอาหาร
@@ -175,14 +193,28 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
               </h2>
             </div>
           </div>
-          <div className="lg:flex mb-10 flex-wrap md:flex-no-wrap">
+          <div className="pb-8 flex flex-wrap md:flex-no-wrap">
+            <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
+              <span className="tracking-widest font-medium title-font text-gray-900 text-2xl">
+                หมายเหตุอาหาร
+              </span>
+            </div>
+            <div className="md:flex-grow w-full pr-4">
+              <textarea
+                class="bg-white w-full rounded border border-gray-400 focus:outline-none h-32 focus:border-teal-400 text-base px-4 py-2 mb-4 resize-none"
+                placeholder={`เช่น \n  - ก๋วยเตี๋ยวลูกชิ้น ไม่ใส่ถั่วงอก\n  - ขอพริกน้ำปลาด้วย`}
+                onChange={(e) => setNote(e.target.value)} />
+              {/* <p class="text-xs text-gray-500 mt-3">เพราะเราใส่ใจคุณ เราจะพยายรายละเอียดของอาหาร</p> */}
+            </div>
+          </div>
+          <div className="mb-10 flex flex-wrap md:flex-no-wrap">
             <div className="md:w-64 md:mb-0 mb-6 flex-shrink-0 flex flex-col">
               <span className="tracking-widest font-medium title-font text-gray-900 text-2xl">
                 ค่าบริการ
               </span>
             </div>
-            <div className="md:flex-grow">
-              <div className="flex border-b border-gray-300 py-2">
+            <div className="md:flex-grow w-full pr-4">
+              <div className="flex border-b border-gray-300 py-2 ">
                 <span className="text-xl">ค่าบริการตามระยะทาง</span>
                 <span className="ml-auto text-gray-900 text-lg">
                   {serviceChargeDistance} บาท
@@ -213,17 +245,14 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
       </div>
       {distance != 0 ?
         (
-          <NavLink
-            to={`/payment/${totalPrice + serviceChargeDistance}/${userInfo.name + "_" + merchantName}`}
-            onClick={addOrder}>
-            <button className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg">
-              สั่งอาหาร
+          <button className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
+            onClick={() => setOpenModal(true)}>
+            สั่งอาหาร
           </button>
-          </NavLink>
         ) : (
           <button
             className="text-white w-full bg-gray-300 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg"
-          >
+            onClick={() => refreshPage()}>
             สั่งอาหาร
           </button>)
       }
