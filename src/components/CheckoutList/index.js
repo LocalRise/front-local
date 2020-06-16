@@ -73,7 +73,7 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
 
   const addOrder = async (e) => {
     try {
-      db.collection('orders').get()
+      await db.collection('orders').get()
         .then(snap => {
           db.collection('orders').doc('F' + (snap.size + 1).toString()).set({
             date: today,
