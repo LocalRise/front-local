@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { SignUpButton, SignInButton } from './index'
 import SignOutButton from './SignOutButton'
+import firebase from '../../services/firebase'
 
 const DropdownItem = ({ children }) => {
   return (
@@ -12,7 +13,16 @@ const DropdownItem = ({ children }) => {
 
 const ProfileDropdown = ({ user }) => {
   const [toggle, setToggle] = useState(false)
-  console.log(user)
+  const db = firebase.firestore()
+  let [userName, setUserName] = useState('')
+  if (user.uid) {
+    db.collection("customers")
+      .doc(user.uid)
+      .get()
+      .then(async doc => { setUserName(doc.data().firstname + " " + doc.data().lastname) })
+  } else {
+    setUserName("UserName")
+  }
   return (
     <div className="relative w-10 h-10">
       <div
@@ -33,9 +43,9 @@ const ProfileDropdown = ({ user }) => {
         />
       )}
       {toggle && (
-        <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-xl">
-          <DropdownItem>First</DropdownItem>
-          <SignOutButton render={() => <DropdownItem>Signout</DropdownItem>} />
+        <div className="absolute right-0 mt-2 bg-white rounded-lg shadow-xl w-48">
+          <DropdownItem>{userName}</DropdownItem>
+          <SignOutButton render={() => <DropdownItem>ลงชื่อออก</DropdownItem>} />
         </div>
       )}
       {/* {user ? (

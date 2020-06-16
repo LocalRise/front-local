@@ -22,30 +22,18 @@ class MapContainer extends Component {
     }
 
     render() {
-        // const { google } = this.props
-        // const service = new google.maps.DistanceMatrixService();
-        // const serviceDistance = (org, dest) => {
-        //     service.getDistanceMatrix(
-        //         {
-        //             origins: [org],
-        //             destinations: [dest],
-        //             travelMode: "DRIVING"
-        //         },
-        //         (response, status) => {
-        //             var dst = response.rows[0].elements[0].distance.value
-        //             console.log("response", dst);
-        //             console.log("status", status);
-        //         }
-        //     )
-        //     // return 5
-        // }
         return !this.props.isGeolocationAvailable || !this.props.isGeolocationEnabled ? (
             <div className="rounded-lg overflow-hidden">
-                <MapComponent isMarkerShown={true} posit={defaultLampange} zoom={12} setCustomerLocation={this.props.setCustomerLocation} />
+                <MapComponent
+                    isMarkerShown={true}
+                    posit={defaultLampange}
+                    zoom={12}
+                    setCustomerLocation={this.props.setCustomerLocation} />
             </div>
         ) : this.props.coords ? (
             <div className="rounded-lg overflow-hidden">
-                <MapComponent isMarkerShown={true}
+                <MapComponent
+                    isMarkerShown={true}
                     posit={{ lat: this.props.coords.latitude, lng: this.props.coords.longitude }}
                     zoom={16}
                     setCustomerLocation={this.props.setCustomerLocation} />
@@ -58,5 +46,5 @@ export default geolocated({
     positionOptions: {
         enableHighAccuracy: true
     },
-    userDecisionTimeout: 5000
+    userDecisionTimeout: 13000
 })(MapContainer);

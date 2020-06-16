@@ -35,11 +35,12 @@ class GetDistance extends Component {
                             this.props.setDistance(dist)
 
                             this.props.setDistToFixed1(dist.toFixed(1))
+                            // ไม่เกิน 5 kg 15 บาท ถ้าเกิน kg ละ 5 บาท
                             if (dist > 5) {
-                                // ไม่เกิน 5 kg, kg ละ 15 บาท ถ้าเกิน kg ละ 5 บาท
-                                this.props.setServiceChargeDistance((5 * 15 + (dist - 5) * 5).toFixed(0))
+                                // this.props.setServiceChargeDistance(parseInt((15 + (Math.ceil(dist) - 5) * 5).toFixed(0)))
+                                this.props.setServiceChargeDistance(parseInt((Math.ceil(dist) - 5) * 5))
                             } else {
-                                this.props.setServiceChargeDistance((dist * 15).toFixed(0))
+                                this.props.setServiceChargeDistance(parseInt(0))
                             }
 
                             // console.log(dst/1000)

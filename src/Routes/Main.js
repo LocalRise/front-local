@@ -6,6 +6,7 @@ import Navbar from '../components/NavBar/Navbar'
 import { SignInContainer, SignUpContainer } from '../containers/Auth'
 import PrivateRoute from './PrivateRoute'
 import Checkout from '../containers/Checkout'
+import Payment from './../containers/Payment'
 
 const Main = () => {
   const [openCart, setOpenCart] = useState(false)
@@ -20,6 +21,7 @@ const Main = () => {
             render={(props) => <Merchant openCart={openCart} />}
           />
           <PrivateRoute exact path="/checkout/:id/" component={Checkout} />
+          <PrivateRoute exact path="/payment/:cost/:identity" component={Payment} />
           <Route exact path="/signin" exact component={SignInContainer} />
           <Route exact path="/signup" exact component={SignUpContainer} />
           <Route exact path="/" component={AppHome} />

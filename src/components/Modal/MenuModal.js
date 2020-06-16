@@ -39,7 +39,7 @@ const MenuModal = ({ open, handleClose, data = {}, handleAddItem }) => {
 
   return (
     <Modal open={open} handleClose={handleClose}>
-      <div className="w-full lg:w-1/3 p-5 bg-white z-50 m-auto rounded overflow-hidden">
+      <div className="max-w-md w-full lg:w-1/3 p-5 bg-white z-50 m-auto rounded overflow-hidden">
         <h1 className="tracking-widest text-xl mb-1 font-medium">{menuName}</h1>
         <div className="flex items-center justify-between mb-2">
           <p className="text-lg">จำนวน</p>
@@ -60,9 +60,9 @@ const MenuModal = ({ open, handleClose, data = {}, handleAddItem }) => {
             </ButtonIcon>
           </div>
         </div>
-        <div className="flex justify-center">
+        <div className="flex justify-center mt-2">
           <ButtonIcon handleClick={handleSubmit} styles={"bg-orange-500 hover:bg-orange-600 px-4"}>
-            <FiShoppingCart className="mx-3" />
+            <FiShoppingCart className="mx-3" /> เพิ่มลงตะกร้า
           </ButtonIcon>
         </div>
       </div>

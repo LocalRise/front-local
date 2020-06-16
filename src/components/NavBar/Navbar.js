@@ -10,8 +10,8 @@ const Navbar = ({ setCollapse, setOpenCart, openCart }) => {
   const { user } = useAuth()
 
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-transparent p-3 fixed w-full z-50 h-16">
-      <div className="flex items-center flex-shrink-0 text-white mr-6">
+    <nav className="flex items-center justify-between flex-wrap bg-white p-3 fixed w-full z-50 h-16">
+      <div className="flex items-center flex-shrink-0 text-white mr-6 w-1">
         <NavLink to="/">
           <LogoText />
         </NavLink>
@@ -21,12 +21,12 @@ const Navbar = ({ setCollapse, setOpenCart, openCart }) => {
           <div className="mr-2">
             <ProfileDropdown user={user} />
           </div>
-          <div className="lg:hidden -mt-2">
+          <div className="lg:hidden -mt-3">
             <CartButton setCollapse={setCollapse} setOpenCart={setOpenCart} openCart={openCart} />
           </div>
         </div>
       ) : (
-          <div className="flex -mt-2">
+          <div className="flex -mt-3">
             <div className="mr-2">
               <SignUpButton />
             </div>

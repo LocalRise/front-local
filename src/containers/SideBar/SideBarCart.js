@@ -8,7 +8,7 @@ import { useCart } from './../../contexts'
 
 const Container = ({ children, openCart }) => {
   return (
-    <div className={`${openCart ? "" : "hidden"} z-30 fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5 shadow-lg`}>
+    <div className={`${openCart ? "" : "hidden"} z-30 fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5 shadow-lg overflow-y-scroll`}>
       <div class="h-full scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:top-16 bg-white lg:bg-transparent">
         {children}
       </div>
@@ -42,7 +42,7 @@ const SideBarCart = ({ merchantId, loading, order, handleRemoveItem, menu, openC
 
   return (
     <Container openCart={openCart}>
-      <div class="flex flex-col p-5">
+      <div class="flex flex-col p-5 ">
         <p class="mb-2 font-bold">รายการสั่งซื้อ</p>
         {order &&
           menu &&
@@ -76,7 +76,8 @@ const SideBarCart = ({ merchantId, loading, order, handleRemoveItem, menu, openC
             ชำระเงิน
           </button>
         </Link>
-
+          <br/>
+          <br/>
       </div>
     </Container>
   )

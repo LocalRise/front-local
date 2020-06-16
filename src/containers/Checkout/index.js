@@ -1,12 +1,29 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { useMerchant, useCart, CartContext } from '../../contexts'
 import Map from './../../components/GoogleMap'
 import CheckoutList from './../../components/CheckoutList'
+import { useAuth } from './../../contexts'
+import firebase from '../../services/firebase'
 
 const Checkout = ({ location }) => {
   const id = new URLSearchParams(location.search).get('id')
   const [customerLocation, setCustomerLocation] = useState({ lat: 0, lng: 0 })
+  const { user } = useAuth()
+  const db = firebase.firestore()
+  const [userName, setUserName] = useState('')
+  const [userTel, setUserTel] = useState('')
+  if (user.uid) {
+    db.collection("customers")
+      .doc(user.uid)
+      .get()
+      .then(async doc => { 
+        const data = doc.data()
+        setUserName(data.firstname + " " + data.lastname) 
+        setUserTel(data.tel)
+      })
+  } else {
+    setUserName("UserName")
+  }
 
   return (
     <>
@@ -27,6 +44,7 @@ const Checkout = ({ location }) => {
             <CheckoutList
               location={location}
               customerLocation={customerLocation}
+              userInfo={{name:userName,tel:userTel}}
             ></CheckoutList>
           </div>
         </section>

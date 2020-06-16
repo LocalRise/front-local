@@ -42,13 +42,14 @@ function footer() {
                     <Button>สนใจเป็นเข้าร่วมรายการ</Button>
                 </a>
             </div>
-            <div >
-                <a href="/" style={{ textDecoration: "none", fontSize:'15px', color:'white'}}>
-                © {new Date().getFullYear()}{" "}
+            <div className="flex mt-5">
+                <a className="text-black pl-4" href="/" style={{ textDecoration: "none", fontSize: '15px' }}>
+                    © {new Date().getFullYear()}{" "}
                 Fresh2Home
                 </a>
+                <a className="text-red-600 ml-auto pr-4 text-lg" href="mailto:fresh2home.info@gmail.com?subject=แจ้งปัญหาการใช้งาน WebSite" style={{ textDecoration: "none"}}>
+                    แจ้งปัญหาการใช้งาน</a>
             </div>
-            { ` ` }
         </div>
     )
 }

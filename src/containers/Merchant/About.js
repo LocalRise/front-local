@@ -7,8 +7,10 @@ import { FaFacebook } from 'react-icons/fa'
 import { IoIosCall } from 'react-icons/io'
 import { FiPhoneOutgoing } from 'react-icons/fi'
 
-const About = ({ merchant:{description,facebook,foodType,id,image,location,name,openingTime,payment,tel} }) => {
+const About = ({ merchant: { description, facebook, foodType, id, image, location, name, openingTime, openingDay, payment, tel } }) => {
   // dropdown props
+  const dayWork = "Sun Mon Tue Wed Thur Fri Sat"
+  const today = Date().toString().substring(0, 3).toLowerCase()
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false)
   const btnDropdownRef = React.createRef()
   const popoverDropdownRef = React.createRef()
@@ -29,6 +31,9 @@ const About = ({ merchant:{description,facebook,foodType,id,image,location,name,
       <div className="flex flex-wrap mb-2">
         <div className="w-full px-3">
           <div className="relative inline-flex align-middle w-full">
+            <div className={`absolute left-0 -mt-3 rounded-full pb-1 pt-2 px-4 ${openingDay.toLowerCase().split(" ").includes(today) ? "bg-teal-600" : "bg-orange-600"}`}>
+              <p className="text-white font-bold">{openingDay.toLowerCase().split(" ").includes(today) ? "วันนี้ร้านเปิด" : "วันนี้ร้านปิด"}</p>
+            </div>
             <AiOutlineInfoCircle
               className="absolute right-0 -mt-3 text-3xl rounded-full "
               style={{ backgroundColor: 'white', transition: 'all .15s ease' }}
@@ -113,14 +118,25 @@ const About = ({ merchant:{description,facebook,foodType,id,image,location,name,
               </a>
 
               <div className="h-0 my-2 border border-solid border-t-0 border-gray-900 opacity-25" />
-
-              {/* {openingTime && (
-                <p className="text-base py-2 px-4 font-normal block w-full bg-transparent text-gray-800 w-full flex flex-warp">
+              {openingTime && (
+                <p className="flex text-base py-2 px-4 font-normal block w-full bg-transparent text-gray-800 w-full">
                   <MdAccessTime
-                    style={{ fontSize: '1.6em', margin: '0 20px 0 0' }}
-                  />{' '}
+                    className="my-auto mr-4"
+                    style={{ fontSize: '1.6em' }}
+                  />
+                  <div>
+                    {dayWork.toString().split(" ").map(val => {
+                      return (
+                        <div>
+                          <div className={`flex text-lg ${today === val.toLowerCase() ? "text-blue-700" : "text-gray-500"}`}>
+                            <div className="w-12">{val + "\t"}</div>
+                            {openingDay.split(" ").includes(val) ? `${openingTime}` : "CLOSE"}</div>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </p>
-              )} */}
+              )}
               <p
                 className={
                   'text-sm py-2 px-4 font-normal block w-full bg-transparent text-gray-800 w-full flex flex-warp'
