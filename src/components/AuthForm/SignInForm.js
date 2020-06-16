@@ -1,16 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { FaFacebook } from 'react-icons/fa'
 
-const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
+import * as firebase from 'firebase/app'
+
+const SignInForm = ({ error, handleSignIn, handleFacebookSignIn }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState()
+  const handleSubmit = () => {
+    handleSignIn({ email, password })
+  }
+
+  useEffect(() => {
+    if (!error) return
+    switch (error.code) {
+      case 'auth/wrong-password':
+      case 'auth/user-not-found':
+        setErrorMessage('ชื่อผู้ใช้หรือรหัสผ่านผิด กรุณาตรวจสอบอีกครั้ง')
+        break
+      default:
+        setErrorMessage('ระบบมีปัญหากรุณาใช้งานในภายหลัง')
+        break
+    }
+  }, [error])
 
   return (
-    <div className="bg-cover pt-10 pb-10 bg-fixed h-screen bg-center" style={{ backgroundImage: `url(${'images/meal-plan-bg-white.jpg'})` }}>
+    <div
+      className="bg-cover pt-10 pb-10 bg-fixed h-screen bg-center"
+      style={{ backgroundImage: `url(${'images/meal-plan-bg-white.jpg'})` }}
+    >
       <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 max-w-lg mx-auto">
         <div class="flex flex-col text-center w-full mb-12 mt-10">
-          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">ลงชื่อเข้าใช้</h1>
-          <p class="lg:w-2/3 mx-auto leading-relaxed text-base">เข้าสู่ระบบเพื่อเริ่มการสั่งอาหารได้เลย!</p>
+          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">
+            ลงชื่อเข้าใช้
+          </h1>
+          <p class="lg:w-2/3 mx-auto leading-relaxed text-base">
+            เข้าสู่ระบบเพื่อเริ่มการสั่งอาหารได้เลย!
+          </p>
         </div>
         <div className="mb-4">
           <label
@@ -26,7 +52,11 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
           />
-          { email!="" && (!email.includes('@') || !email.includes('.')) && <div className="text-red-600 text-sm">โปรกรอกอีเมลให้ถูกต้อง (abc@mail.com)</div>}
+          {email != '' && (!email.includes('@') || !email.includes('.')) && (
+            <div className="text-red-600 text-sm">
+              โปรกรอกอีเมลให้ถูกต้อง (abc@mail.com)
+            </div>
+          )}
         </div>
         <div className="mb-8">
           <label
@@ -41,15 +71,23 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
             onChange={(e) => setPassword(e.target.value)}
             type="password"
           />
-          { password ==="" && email!="" && <div className="text-red-600 text-sm">โปรกรอกรหัสผ่าน</div>}
+          {password === '' && email != '' && (
+            <div className="text-red-600 text-sm">โปรดกรอกรหัสผ่าน</div>
+          )}
         </div>
+        {errorMessage && (
+          <div
+            class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-5"
+            role="alert"
+          >
+            <span class="block sm:inline">{errorMessage}</span>
+          </div>
+        )}
         <div className="flex items-center justify-between mb-3">
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 w-full rounded focus:outline-none focus:shadow-outline"
             type="button"
-            onClick={() => {
-              handleSignIn({ email, password })
-            }}
+            onClick={handleSubmit}
           >
             ลงชื่อเข้าใช้
           </button>
@@ -72,4 +110,4 @@ const SignInForm = ({ handleSignIn, handleFacebookSignIn }) => {
   )
 }
 
-export default SignInForm
+export default React.memo(SignInForm)

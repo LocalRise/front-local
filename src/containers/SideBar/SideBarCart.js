@@ -8,7 +8,11 @@ import { useCart } from './../../contexts'
 
 const Container = ({ children, openCart }) => {
   return (
-    <div className={`${openCart ? "" : "hidden"} z-30 fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5 shadow-lg overflow-y-scroll`}>
+    <div
+      className={`${
+        openCart ? '' : 'hidden'
+      } z-30 fixed inset-0 pt-16 h-full bg-white z-90 w-full border-b -mb-16 lg:-mb-0 lg:static lg:h-auto lg:overflow-y-visible lg:border-b-0 lg:pt-0 lg:w-1/4 lg:block lg:border-0 xl:w-1/5 shadow-lg overflow-y-scroll`}
+    >
       <div class="h-full scrolling-touch lg:h-auto lg:block lg:relative lg:sticky lg:top-16 bg-white lg:bg-transparent">
         {children}
       </div>
@@ -16,15 +20,23 @@ const Container = ({ children, openCart }) => {
   )
 }
 
-const SideBarCart = ({ merchantId, loading, order, handleRemoveItem, menu, openCart }) => {
+const SideBarCart = ({
+  merchantId,
+  loading,
+  order,
+  handleRemoveItem,
+  menu,
+  openCart,
+}) => {
   const [totalPrice, setTotalPrice] = useState(0)
+  const orderCart = order[merchantId]
 
   useEffect(() => {
-    if (!menu || !menu) return
+    if (!menu || !orderCart) return
     let total = 0
-    Object.keys(order).map((menuId) => {
-      if (!menu[menuId] || !order[menuId]) return
-      const price = menu[menuId].menuPrice * order[menuId]
+    Object.keys(orderCart).map((menuId) => {
+      if (!menu[menuId] || !orderCart[menuId]) return
+      const price = menu[menuId].menuPrice * orderCart[menuId]
       console.log(price, menu[menuId])
       total += price
     })
@@ -44,22 +56,24 @@ const SideBarCart = ({ merchantId, loading, order, handleRemoveItem, menu, openC
     <Container openCart={openCart}>
       <div class="flex flex-col p-5 ">
         <p class="mb-2 font-bold">รายการสั่งซื้อ</p>
-        {order &&
+        {orderCart &&
           menu &&
-          Object.keys(order).map((menuId) => {
+          Object.keys(orderCart).map((menuId) => {
             // console.log('----', menu, menuId)
-            if (!menu[menuId] || !order[menuId]) return
+            if (!menu[menuId] || !orderCart[menuId]) return
             const { menuName } = menu[menuId]
-            const amount = order[menuId]
+            const amount = orderCart[menuId]
             return (
               <div key={menuId}>
                 <div class="flex ">
                   <span class="text-lg mb-4">{menuName}</span>
-                  <MdClose className="ml-auto pt-1 text-2xl text-orange-500"
+                  <MdClose
+                    className="ml-auto pt-1 text-2xl text-orange-500"
                     onClick={() => {
                       handleRemoveItem(menuId, -1 * amount)
                       // console.log(menuId, amount-1)
-                    }} />
+                    }}
+                  />
                 </div>
                 <div class="flex border-t border-b mb-6 border-gray-300 py-2">
                   <span class="text-gray-500">จำนวน</span>
@@ -71,13 +85,19 @@ const SideBarCart = ({ merchantId, loading, order, handleRemoveItem, menu, openC
         <span class="title-font font-medium text-2xl text-gray-900 text-center">
           รวม {totalPrice && totalPrice} บาท
         </span>
-        <Link to={totalPrice && totalPrice > 0 ? `/checkout/${merchantId}/` :  `/merchant/${merchantId}/`}>
+        <Link
+          to={
+            totalPrice && totalPrice > 0
+              ? `/checkout/${merchantId}/`
+              : `/merchant/${merchantId}/`
+          }
+        >
           <button class="flex ml-auto mr-auto mt-3 text-white font-bold bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded">
             ชำระเงิน
           </button>
         </Link>
-          <br/>
-          <br/>
+        <br />
+        <br />
       </div>
     </Container>
   )

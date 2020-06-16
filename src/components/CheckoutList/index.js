@@ -5,7 +5,6 @@ import firebase from '../../services/firebase'
 import Distance from './../../services/distance'
 import { VerifySubmitModal } from './../Modal'
 
-
 const CheckoutList = ({ location, customerLocation, userInfo }) => {
   const { id } = useParams()
   const {
@@ -27,18 +26,19 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
   }
 
   function refreshPage() {
-    window.location.reload(false);
+    window.location.reload(false)
   }
 
   const merchant = merchants[id]
   const menu = menus[id]
+  const orderCart = order[id]
   const [totalPrice, setTotalPrice] = useState(0)
   const name = merchant && merchant.name
   const merchantLocation = merchant && merchant.location
   const [distance, setDistance] = useState(0)
   const [serviceChargeDistance, setServiceChargeDistance] = useState(0)
   const [distToFixed1, setDistToFixed1] = useState(0)
-  const [note, setNote] = useState("")
+  const [note, setNote] = useState('')
   // const [serviceChargeCarry, setServiceChargeCarry] = useState(0)
   // * use with gg sheet
   const [menuList, setMenuList] = useState([])
@@ -53,52 +53,56 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
 
     let total = 0
     let tmpList = []
-    Object.keys(order).map((menuId) => {
-      if (!menu[menuId] || !order[menuId]) return
+    Object.keys(orderCart).map((menuId) => {
+      if (!menu[menuId] || !orderCart[menuId]) return
       const { menuName, menuPrice } = menu[menuId]
-      const amount = order[menuId]
+      const amount = orderCart[menuId]
       const price = menuPrice * amount
       total += price
       tmpList.push({ set: [menuName, menuPrice, amount, menuPrice * amount] })
     })
     setTotalPrice(total)
     setMenuList(tmpList)
-  }, [order, menu])
+  }, [orderCart, menu])
 
-  let d = new Date();
-  let nd = d.toLocaleDateString().split("/");
-  let today = nd[1] + "/" + nd[0] + "/" + nd[2]
+  let d = new Date()
+  let nd = d.toLocaleDateString().split('/')
+  let today = nd[1] + '/' + nd[0] + '/' + nd[2]
 
   const db = firebase.firestore()
 
   const addOrder = async (e) => {
     try {
-      await db.collection('orders').get()
-        .then(snap => {
-          db.collection('orders').doc('F' + (snap.size + 1).toString()).set({
-            date: today,
-            customerId: user.uid,
-            customerName: userInfo.name,
-            customerTel: userInfo.tel,
-            merchantId: id,
-            orderList: order,
-            totalPrice: totalPrice,
-            customerLocation: customerLocation,
-            distance: distance,
-            restaurantLoaction: merchantLinkLocation,
-            restaurantName: merchantName,
-            serviceChargeDistance: serviceChargeDistance,
-            menuList: menuList,
-            note: note,
-          })
+      await db.collection('orders')
+        .get()
+        .then((snap) => {
+          db.collection('orders')
+            .doc('F' + (snap.size + 1).toString())
+            .set({
+              date: today,
+              customerId: user.uid,
+              customerName: userInfo.name,
+              customerTel: userInfo.tel,
+              merchantId: id,
+              orderList: order,
+              totalPrice: totalPrice,
+              customerLocation: customerLocation,
+              distance: distance,
+              restaurantLoaction: merchantLinkLocation,
+              restaurantName: merchantName,
+              serviceChargeDistance: serviceChargeDistance,
+              menuList: menuList,
+              note: note,
+            })
           alert('รายการสั่งซื้อของคุณถูกส่งไปยังผู้ขายแล้ว')
-        });
+        })
     } catch (e) {
-      alert('คุณคือผู้โชคดี แคปหน้านี้ไว้ และติดต่อ @Fresh2Home เพื่อรับการส่งฟรี \nรหัสโค้ดคือ', e)
+      alert(
+        'คุณคือผู้โชคดี แคปหน้านี้ไว้ และติดต่อ @Fresh2Home เพื่อรับการส่งฟรี \nรหัสโค้ดคือ',
+        e
+      )
     }
-
   }
-
 
   return (
     <section className="body-font overflow-hidden">
@@ -107,18 +111,18 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
         handleClose={handleClose}
         addOrder={addOrder}
         cost={totalPrice + serviceChargeDistance}
-        cusName_merName={userInfo.name + "_" + merchantName}
+        cusName_merName={userInfo.name + '_' + merchantName}
       />
       <div className="hidden">
-        {merchant &&
-          merchant.location &&
-          customerLocation &&
-          <Distance merchantLocation={merchantLocation}
+        {merchant && merchant.location && customerLocation && (
+          <Distance
+            merchantLocation={merchantLocation}
             customerLocation={customerLocation}
             setDistance={setDistance}
             setDistToFixed1={setDistToFixed1}
-            setServiceChargeDistance={setServiceChargeDistance} />
-        }
+            setServiceChargeDistance={setServiceChargeDistance}
+          />
+        )}
       </div>
       <div className="container py-20 mx-auto">
         <p className="mx-auto leading-relaxed text-2xl text-left mb-10 text-center font-bold text-gray-700 ">
@@ -161,13 +165,13 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
             </div>
             <div className="md:flex-grow">
               <h2 className="text-2xl font-medium text-gray-900 title-font mb-1">
-                {order &&
+                {orderCart &&
                   menu &&
-                  Object.keys(order).map((menuId) => {
+                  Object.keys(orderCart).map((menuId) => {
                     // console.log('----', menu, menuId)
-                    if (!menu[menuId] || !order[menuId]) return
+                    if (!menu[menuId] || !orderCart[menuId]) return
                     const { menuName, menuPrice } = menu[menuId]
-                    const amount = order[menuId]
+                    const amount = orderCart[menuId]
 
                     return (
                       <div key={menuId}>
@@ -203,7 +207,8 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
               <textarea
                 class="bg-white w-full rounded border border-gray-400 focus:outline-none h-32 focus:border-teal-400 text-base px-4 py-2 mb-4 resize-none"
                 placeholder={`เช่น \n  - ก๋วยเตี๋ยวลูกชิ้น ไม่ใส่ถั่วงอก\n  - ขอพริกน้ำปลาด้วย`}
-                onChange={(e) => setNote(e.target.value)} />
+                onChange={(e) => setNote(e.target.value)}
+              />
               {/* <p class="text-xs text-gray-500 mt-3">เพราะเราใส่ใจคุณ เราจะพยายรายละเอียดของอาหาร</p> */}
             </div>
           </div>
@@ -221,7 +226,7 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
                 </span>
               </div>
               <div className="flex mb-6 py-2 text-gray-500 text-base">
-                <span >ระยะทาง</span>
+                <span>ระยะทาง</span>
                 <span className="ml-auto">{distToFixed1} KM </span>
               </div>
             </div>
@@ -243,19 +248,21 @@ const CheckoutList = ({ location, customerLocation, userInfo }) => {
           </div>
         </div>
       </div>
-      {distance != 0 ?
-        (
-          <button className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
-            onClick={() => setOpenModal(true)}>
-            สั่งอาหาร
-          </button>
-        ) : (
-          <button
-            className="text-white w-full bg-gray-300 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg"
-            onClick={() => refreshPage()}>
-            สั่งอาหาร
-          </button>)
-      }
+      {distance != 0 ? (
+        <button
+          className="text-white w-full bg-orange-600 border-0 py-2 px-6 focus:outline-none hover:bg-teal-600 rounded text-lg"
+          onClick={() => setOpenModal(true)}
+        >
+          สั่งอาหาร
+        </button>
+      ) : (
+        <button
+          className="text-white w-full bg-gray-300 border-0 py-2 px-6 focus:outline-none hover:bg-gray-600 rounded text-lg"
+          onClick={() => refreshPage()}
+        >
+          สั่งอาหาร
+        </button>
+      )}
     </section>
   )
 }
