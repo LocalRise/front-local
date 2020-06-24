@@ -7,6 +7,7 @@ import { SignInContainer, SignUpContainer } from '../containers/Auth'
 import PrivateRoute from './PrivateRoute'
 import Checkout from '../containers/Checkout'
 import Payment from './../containers/Payment'
+import Team from './../containers/Team'
 
 const Main = () => {
   const [openCart, setOpenCart] = useState(false)
@@ -20,6 +21,7 @@ const Main = () => {
             path="/merchant/:id/"
             render={(props) => <Merchant openCart={openCart} />}
           />
+          <Route exact path="/team" exact component={Team} />
           <PrivateRoute exact path="/checkout/:id/" component={Checkout} />
           <PrivateRoute exact path="/payment/:cost/:identity" component={Payment} />
           <Route exact path="/signin" exact component={SignInContainer} />
