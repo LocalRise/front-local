@@ -27,6 +27,7 @@ const Team = () => {
         </div>
         <div className="text-lg pl-4">
           <p>ศุภณัฐ ต้อขัดคำ </p>
+          <p>เสฐียรพงษ์ มั่นทอง</p>
         </div>
         <div className="flex relative">
           <h1 className="font-bold text-xl"> Operation </h1>
@@ -37,6 +38,7 @@ const Team = () => {
         <div className="text-lg pl-4">
           <p>ปรวีร์ ปั้นเทศ </p>
           <p>สิรวิชญ์ พงศ์วิลาวัณย์</p>
+          <p>นาริฐา สังข์วชิรสกุล</p>
         </div>
         <div className="flex relative">
           <h1 className="font-bold text-xl"> Developer </h1>
@@ -45,7 +47,7 @@ const Team = () => {
           </a>
         </div>
         <div className="text-lg pl-4 mb-8">
-          <p>ศักดิ์ชัย วชิรเมธากร </p>
+          <p>ศักดิ์ชัย วชิรเมธากร</p>
           <p>วรัญญู เนรังสี</p>
           <p>ณัฐภัทร ศรีวิชัยลำพันธ์</p>
         </div>
