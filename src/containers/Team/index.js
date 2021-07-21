@@ -10,7 +10,7 @@ const Team = () => {
         </div>
         <div className="flex relative">
           <h1 className="font-bold text-xl"> Executive </h1>
-          <a href="tel:0910785410" className="text-xl absolute right-0 mr-8 text-blue-500">
+          <a href="" className="text-xl absolute right-0 mr-8 text-blue-500">
             <IoIosCall />
           </a>
         </div>
@@ -21,7 +21,7 @@ const Team = () => {
         </div>
         <div className="flex relative">
           <h1 className="font-bold text-xl"> Human Resources </h1>
-          <a href="tel:0931365155" className="text-xl absolute right-0 mr-8 text-blue-500">
+          <a href="" className="text-xl absolute right-0 mr-8 text-blue-500">
             <IoIosCall />
           </a>
         </div>
@@ -31,7 +31,7 @@ const Team = () => {
         </div>
         <div className="flex relative">
           <h1 className="font-bold text-xl"> Operation </h1>
-          <a href="tel:0982155667" className="text-xl absolute right-0 mr-8 text-blue-500">
+          <a href="" className="text-xl absolute right-0 mr-8 text-blue-500">
             <IoIosCall />
           </a>
         </div>
@@ -42,7 +42,7 @@ const Team = () => {
         </div>
         <div className="flex relative">
           <h1 className="font-bold text-xl"> Developer </h1>
-          <a href="tel:0931316936" className="text-xl absolute right-0 mr-8 text-blue-500">
+          <a href="" className="text-xl absolute right-0 mr-8 text-blue-500">
             <IoIosCall />
           </a>
         </div>
